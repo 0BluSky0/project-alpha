@@ -5,3 +5,7 @@ document.querySelectorAll(".challenge").forEach(button => {
         window.location.href="../challenge/index.html"
     })
 })
+
+document.getElementById("logout").addEventListener("click", (e) => {
+    window.location.href="../login/index.html"
+})

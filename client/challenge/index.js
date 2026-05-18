@@ -5,6 +5,10 @@ if (topic){
 } else document.getElementById("topic-title").textContent = "Challenge"
 
 
+document.getElementById("back").addEventListener("click", (e) => {
+    window.location.href="../homepage/index.html"
+})
+
 
 async function fetchQuestions(topic){
     try{
