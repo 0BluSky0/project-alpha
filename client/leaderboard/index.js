@@ -91,7 +91,7 @@ function createStudentCard(student) {
 
     const streak = document.createElement("p");
     streak.classList.add("studentStreak");
-    streak.textContent = `🔥 ${student.streak} day streak`;
+    streak.textContent = "🔥 " + student.streak + " day streak";
 
     const pointsSection = document.createElement("section");
     pointsSection.classList.add("studentPointsSection");
@@ -103,3 +103,26 @@ function createStudentCard(student) {
     const pointsLabel = document.createElement("p");
     pointsLabel.classList.add("pointsLabel");
     pointsLabel.textContent = "points";
+
+    details.appendChild(name);
+    details.appendChild(streak);
+    pointsSection.appendChild(points);
+    pointsSection.appendChild(pointsLabel);
+
+    card.appendChild(rank);
+    card.appendChild(initials);
+    card.appendChild(details);
+    card.appendChild(pointsSection);
+
+    if (student.rank === 1) {
+        card.classList.add("firstaPlace");
+    }
+    if (student.rank === 2) {
+        card.classList.add("secondPlace");
+    }
+    if (student.rank === 3) {
+        card.classList.add("thirdPlace");
+    }
+    
+    return card;
+}
