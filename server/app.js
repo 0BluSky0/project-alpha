@@ -7,9 +7,13 @@ app.use(cors());
 app.use(express.json());
 
 // Routers (import these once your route files exist)
-// const authRouter = require("./routers/authRouter");
-// const questionRouter = require("./routers/questionRouter");
-// const scoreRouter = require("./routers/scoreRouter");
+const authRouter = require("./router/Router");
+const gameRouter = require("./routers/gameRouter");
+const scoreRouter = require("./routers/scoreRouter");
+
+app.use ("/auth, authRouter");
+app.use("/game, gameRouter")
+app.use("/scores", scoreRouter);
 
 // Mount routers
 // app.use("/auth", authRouter);
