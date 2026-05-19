@@ -2,6 +2,7 @@
 const userData = {
   username: "",
   password: "",
+  email: "",
   theme: "",
 };
 
@@ -36,6 +37,8 @@ function nextQuestion(currentQ) {
     userData.username = document.getElementById("username").value.trim();
   } else if (currentQ === 2) {
     userData.password = document.getElementById("password").value.trim();
+  } else if (currentQ ===3) {
+    userData.email = document.getElementById("email").value.trim();
   }
 
   if (currentQ === 1 && !userData.username) {
@@ -45,6 +48,10 @@ function nextQuestion(currentQ) {
   } else if (currentQ === 2 && !userData.password) {
     alert("Please enter a password!");
     document.getElementById("password").focus();
+    return;
+  } else if (currentQ === 3 && !userData.email) {
+    alert("Please enter an email!");
+    document.getElementById("email").focus();
     return;
   }
 
