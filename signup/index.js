@@ -74,4 +74,38 @@ function finishQuiz() {
   }
 }
 
+async function finishQuiz(){
+  try{
+    localStorage.setItem("theme", userData.theme)
+    setTheme(userData.theme)
+
+    const requestBody = {
+      username: userData.username,
+      password: userData.password,
+      email: userData.email,
+      theme: userData.theme
+    }
+
+    const response = await fetch("http://localhost:3000/auth/signup", {
+      method: "POST",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application.json'
+      },
+      body: JSON.stringify(requestBody)
+    })
+    const data = await response.json()
+
+    if(response.ok){
+      window.location.href = "/client/login/index.html"
+    } else {
+      console.error( "Failed to register. Please try again.")
+    }
+  } catch(err){
+    console.error("Error in finishQuiz")
+    alert("An error occurred. Please try again")
+  }
+}
+
+
 document.getElementById("login-btn").addEventListener("click", ()=> window.location.href="/client/login/index.html")
