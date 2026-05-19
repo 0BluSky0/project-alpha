@@ -1,7 +1,7 @@
 const db = require('../database/db');
 
 class User {
-  constructor({ id, username, email, password_hash, role, total_xp, level, created_at }) {
+  constructor({ id, username, email, password_hash, role, total_xp, level, colour_scheme, created_at }) {
     this.id = id;
     this.username = username;
     this.email = email;
@@ -9,23 +9,16 @@ class User {
     this.role = role;
     this.total_xp = total_xp;
     this.level = level;
+    this.colour_scheme = colour_scheme;
     this.created_at = created_at;
   }
 
   static async create(username, email, hashedPassword) {
-    try {
-
-      const response = await db.query(
+    const response = await db.query(
       'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING *;',
       [username, email, hashedPassword]
-      );
-      
-      return new User(response.rows[0]);
-      
-    } catch (error) {
-      throw new Error(error.message)
-    }
-
+    );
+    return new User(response.rows[0]);
   }
 
   static async findByEmail(email) {
@@ -67,6 +60,17 @@ class User {
     );
     if (response.rows.length != 1) {
       throw new Error('Unable to update XP.');
+    }
+    return new User(response.rows[0]);
+  }
+
+  static async updateColourScheme(userId, colourScheme) {
+    const response = await db.query(
+      'UPDATE users SET colour_scheme = $2 WHERE id = $1 RETURNING *;',
+      [userId, colourScheme]
+    );
+    if (response.rows.length != 1) {
+      throw new Error('Unable to update colour scheme.');
     }
     return new User(response.rows[0]);
   }

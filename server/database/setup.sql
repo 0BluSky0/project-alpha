@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
     role VARCHAR(10) DEFAULT 'student',
     total_xp INT DEFAULT 0,
     level INT DEFAULT 1,
-    colour_scheme VARCHAR(20) DEFAULT 'light' CHECK (colour_scheme IN ('dark', 'light', 'ocean', 'forest', 'sunset')),
+    colour_scheme VARCHAR(20) DEFAULT 'light',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -27,11 +27,11 @@ CREATE TABLE IF NOT EXISTS questions (
     created_by INT REFERENCES users(id)
 );
 
--- ANSWERS
-CREATE TABLE IF NOT EXISTS answers (
+-- OPTIONS
+CREATE TABLE IF NOT EXISTS options (
     id SERIAL PRIMARY KEY,
-    question_id INT REFERENCES questions(id) ON DELETE CASCADE,
-    answer_text VARCHAR(255) NOT NULL,
+    question_id INT REFERENCES questions(id),
+    option_text VARCHAR(255) NOT NULL,
     is_correct BOOLEAN NOT NULL
 );
 
@@ -60,8 +60,8 @@ INSERT INTO questions (subject_id, question_text, question_type) VALUES
 (2, 'The first Olympics were held in Athens', 'true_false'),
 (2, 'Name the famous temple on the Acropolis', 'input');
 
--- SEED ANSWERS
-INSERT INTO answers (question_id, answer_text, is_correct) VALUES
+-- SEED OPTIONS
+INSERT INTO options (question_id, option_text, is_correct) VALUES
 (1, 'Pyramids', true), (1, 'Temples', false), (1, 'Ziggurats', false), (1, 'Catacombs', false),
 (2, 'True', true), (2, 'False', false),
 (3, 'Anubis', true),

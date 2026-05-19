@@ -1,21 +1,25 @@
-// const db = require('../database/db');
+const db = require('../database/db');
 
-// class Option {
-//   constructor({ id, question_id, option_text, is_correct }) {
-//     this.id = id;
-//     this.question_id = question_id;
-//     this.option_text = option_text;
-//     this.is_correct = is_correct;
-//   }
+class Option {
+  constructor({ id, question_id, option_text, is_correct }) {
+    this.id = id;
+    this.question_id = question_id;
+    this.option_text = option_text;
+    this.is_correct = is_correct;
+  }
 
-//   static async create(questionId, optionText, isCorrect) {
-//     const response = await db.query(
-//       'INSERT INTO options (question_id, option_text, is_correct) VALUES ($1, $2, $3) RETURNING *;',
-//       [questionId, optionText, isCorrect]
-//     );
+  static async getByQuestion(questionId) {
+    const response = await db.query(
+      'SELECT * FROM options WHERE question_id = $1;',
+      [questionId]
+    );
 
-//     return new Option(response.rows[0]);
-//   }
-// }
+    if (response.rows.length === 0) {
+      throw new Error('No options available for this question.');
+    }
 
-// module.exports = Option;
+    return response.rows.map(o => new Option(o));
+  }
+}
+
+module.exports = Option;

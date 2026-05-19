@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
+const User = require('../models/User');
 
 async function register(req, res) {
     const data = req.body;
@@ -39,4 +39,15 @@ async function login(req, res) {
     }
 }
 
-module.exports = { register, login };
+async function updateColourScheme(req, res) {
+    try {
+        const userId = req.user.id;
+        const { colourScheme } = req.body;
+        const user = await User.updateColourScheme(userId, colourScheme);
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+module.exports = { register, login, updateColourScheme };

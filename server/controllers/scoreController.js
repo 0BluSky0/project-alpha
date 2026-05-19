@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/User');
 const GameSession = require('../models/gameSession');
 
 async function getLeaderboard(req, res) {
