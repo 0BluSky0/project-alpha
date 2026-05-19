@@ -29,7 +29,7 @@ function setTheme(themeName) {
   localStorage.setItem("theme", themeName);
 }
 
-const unlockedTopics = ["suffragettes"]
+const unlockedTopics = ["ancient_egypt", "ancient_greece"]
 
 document.addEventListener("DOMContentLoaded", applyTopicLocks);
 

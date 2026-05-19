@@ -37,7 +37,7 @@
 [data-theme="forest"] {
   --primary: #2e8b57;
   --secondary: #3cb371;
-  --background: #f0f8ff;
+  --background: rgba(144, 238, 144, 0.676)
   --text: #2f4f4f;
   --text-light: #556b2f;
   --accent: #cd853f;

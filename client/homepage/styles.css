@@ -37,7 +37,7 @@
 [data-theme="forest"] {
   --primary: #2E8B57;      
   --secondary: #3CB371;    
-  --background: #F0F8FF;   
+  --background: rgba(144, 238, 144, 0.676);   
   --text: #2F4F4F;         
   --text-light: #556B2F;  
   --accent: #CD853F;  
@@ -77,7 +77,7 @@ body {
 
 button {
   background-color: var(--primary);
-  color: var(--text-light);
+  color: var(--text);
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
