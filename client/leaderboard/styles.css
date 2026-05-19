@@ -1,0 +1,108 @@
+body {
+    background-color: rgba(4, 12, 85, 0.836);
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 30px;
+}
+
+#backButton {
+    display: inline-block;
+    background-color: #a7e8f2;
+    color: black;
+    text-decoration: none;
+    font-size: 32px;
+    padding: 20px 30px;
+    border-radius: 40px;
+    margin-bottom: 20px;
+}
+
+#backButton:hover {
+    background-color: #097f91;
+    color: white;
+}
+
+#leaderboardSection {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#leaderboardSection h1 {
+    color: #041c55;
+    margin-bottom: 25px;
+}
+
+#leaderboardTable {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.studentCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 2px solid #dfeaf0;
+    border-radius: 18px;
+    padding: 15px;
+}
+
+.firstPlace,
+.secondPlace,
+.thirdPlace {
+    background-color: #e6fbff;
+    border-color: #a7e8f2;
+}
+
+.studentRank {
+    width: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #5b6785;
+}
+
+.studentInitials {
+    width: 70px;
+    height: 70px;
+    background-color: #f1f1f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.studentDetails {
+    flex: 1;
+}
+
+.studentName {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+}
+
+.studentStreak {
+    margin: 0;
+    color: #7c7c90;
+    font-size: 22px;
+}
+
+.studentPointsSection {
+    text-align: right;
+}
+
+.studentPoints {
+    margin: 0;
+    font-size: 34px;
+    font-weight: bold;
+}
+
+.pointsLabel {
+    margin: 0;
+    color: #7c7c90;
+    font-size: 20px;
+}
