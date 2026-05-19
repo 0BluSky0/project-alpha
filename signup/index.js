@@ -25,6 +25,8 @@ function setTheme(themeName) {
 
 document.getElementById("next-btn-1").addEventListener("click", () => nextQuestion(1));
 document.getElementById("next-btn-2").addEventListener("click", () => nextQuestion(2));
+document.getElementById("next-btn-3").addEventListener("click", () => nextQuestion(3));
+
 
 function nextQuestion(currentQ) {
   const currentQuestion = document.getElementById(`q${currentQ}`);
@@ -64,3 +66,5 @@ function finishQuiz() {
     alert("An error occurred. Please try again.");
   }
 }
+
+document.getElementById("login-btn").addEventListener("click", ()=> window.location.href="/client/login/index.html")
