@@ -1,55 +1,39 @@
-CREATE TABLE IF NOT EXISTS topics (
-id SERIAL PRIMARY KEY,
-name VARCHAR (255)
-);
-
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR (255)
-    email VARCHAR (255),
-    password_hash VARCHAR(255),
-    role VARCHAR(50)
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role VARCHAR(10) DEFAULT 'student' CHECK (role IN ('student', 'teacher')),
+    total_xp INT DEFAULT 0,
+    level INT DEFAULT 1,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS subjects (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS questions (
     id SERIAL PRIMARY KEY,
-    question_id INT REFERENCES topics (id)
-    answer_text VARCHAR(255)
-    is_correct BOOLEAN
+    subject_id INT REFERENCES subjects(id) ON DELETE CASCADE,
+    question_text TEXT NOT NULL,
+    difficulty VARCHAR(10) DEFAULT 'medium' CHECK (difficulty IN ('easy', 'medium', 'hard')),
+    created_by INT REFERENCES users(id) ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS answers (
+CREATE TABLE IF NOT EXISTS options (
     id SERIAL PRIMARY KEY,
-    question_id INT REFERENCES questions(id)
-    answer_text VARCHAR(255),
-    is_correct BOOLEAN
+    question_id INT REFERENCES questions(id) ON DELETE CASCADE,
+    option_text TEXT NOT NULL,
+    is_correct BOOLEAN NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS scores (
+CREATE TABLE IF NOT EXISTS game_sessions (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id)
-    topic_id INT REFERENCES topics(id),
-    score INT,
-    date_taken DATE
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    subject_id INT REFERENCES subjects(id) ON DELETE CASCADE,
+    score INT NOT NULL,
+    xp_earned INT NOT NULL,
+    completed_at TIMESTAMPTZ DEFAULT NOW()
 );
-
-// Insert questions (mix of types)
-INSERT INTO questions (topic_id, question_text, question_type) VALUES
-(1, 'What were the tombs of Egyptian pharaohs called?', 'multiple_choice'),
-(1, 'The Nile flows through Ancient Egypt', 'true_false'),
-(1, 'Name the Egyptian god of the dead', 'input'),
-(1, 'What system of writing did Ancient Egyptians use?', 'multiple_choice'),
-(2, 'Who was the king of the Greek gods?', 'multiple_choice'),
-(2, 'The first Olympics were held in Athens', 'true_false'),
-(2, 'Name the famous temple on the Acropolis', 'input');
-
-// Insert answers (multiple choice and true/false only, input marked separately)
-INSERT INTO answers (question_id, answer_text, is_correct) VALUES
-(1, 'Pyramids', true), (1, 'Temples', false), (1, 'Ziggurats', false), (1, 'Catacombs', false),
-(2, 'True', true), (2, 'False', false),
-(3, 'Anubis', true),
-(4, 'Hieroglyphics', true), (4, 'Latin', false), (4, 'Cuneiform', false), (4, 'Sanskrit', false),
-(5, 'Zeus', true), (5, 'Poseidon', false), (5, 'Apollo', false), (5, 'Hades', false),
-(6, 'True', false), (6, 'False', true),
-(7, 'The Parthenon', true);
-
