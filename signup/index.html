@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,28 +11,28 @@
     <div class="quiz-container">
         <h1>Let's set up your account!</h1>
         <div id="quiz-questions">
-            <div class="question-active" id="q1">
+            <div class="question active" id="q1">
                 <h2>What's your username?</h2>
                 <input type="text" id="username" placeholder="Choose a username...">
-                <button class="next-btn" onclick="nextQuestion(1)">Next</button>
+                <button class="next-btn" id="next-btn-1">Next</button>
             </div>
 
             <div class="question" id="q2">
                 <h2>Create a password</h2>
                 <input type="text" id="password" placeholder="Keep it secret!">
-                <button class="next-btn" onclick="nextQuestion(2)">Next</button>
+                <button class="next-btn" id="next-btn-2">Next</button>
             </div>
 
             <div class="question" id="q3">
                 <h2>Pick a colour theme!</h2>
                 <div class="colour-options">
-                    <button class="colour-swatch" id="dark-btn" onclick="selectTheme('dark')">Dark</button>
-                    <button class="colour-swatch" id="light-btn" onclick="selectTheme('light')">Light</button>
-                    <button class="colour-swatch" id="ocean-btn" onclick="selectTheme('ocean')">Ocean</button>
-                    <button class="colour-swatch" id="forest-btn" onclick="selectTheme('forest')">Forest</button>
-                    <button class="colour-swatch" id="sunset-btn" onclick="selectTheme('sunset')">Sunset</button>
+                    <button class="colour-swatch" id="dark-btn">Dark</button>
+                    <button class="colour-swatch" id="light-btn">Light</button>
+                    <button class="colour-swatch" id="ocean-btn">Ocean</button>
+                    <button class="colour-swatch" id="forest-btn">Forest</button>
+                    <button class="colour-swatch" id="sunset-btn">Sunset</button>
                 </div>
-                <button class="next-btn" onclick="nextQuestion(2)">Next</button>
+                <button class="next-btn" id="finish-btn">Finish!</button>
             </div>
         </div>
     </div>

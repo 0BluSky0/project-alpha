@@ -29,8 +29,8 @@
   --primary: #03045eff;
   --secondary: #0077b6ff;
   --background: #90e0efff;
-  --text: rgb(4, 4, 47);
-  --text-light: #caf0f8ff;
+  --text: #caf0f8ff;
+  --text-light: rgb(4, 4, 47);
   --accent: #00b4d8ff ;
 }
 
@@ -52,14 +52,99 @@
   --accent: #4ECDC4;  
 }
 
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 80px;
+}
+
+button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 80px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin:3px;
+}
+
+button:hover {
+  background-color: var(--secondary);
+  transform: scale(1.05);
+}
+
 #dark-btn{
-background-color: black;
+background-color:#8A2BE2;
+color:#FFFFFF
 }
 
 #light-btn{
-background-color: black;
+background-color:#5D9CEC;
+color:#333333
 }
 
 #ocean-btn{
-background-color: black;
+background-color: #03045eff;
+color:#caf0f8ff
+}
+
+#forest-btn{
+    background-color:#2E8B57;
+    color:#2F4F4F;
+}
+
+#sunset-btn{
+    background-color: #FF6B6B;
+    color:#8B0000;
+}
+
+.next-btn{
+    background-color:var(--primary);
+    color:var(--text);
+}
+
+.quiz-container {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.quiz-container h1 {
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+.quiz-container h2 {
+  color: var(--secondary);
+  margin-bottom: 15px;
+}
+
+.question {
+  display: none;
+}
+
+.question.active {
+  display: block;
+}
+
+input{
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
