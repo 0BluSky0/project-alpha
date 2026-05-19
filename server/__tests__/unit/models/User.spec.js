@@ -84,10 +84,47 @@ describe('User', () => {
 
             //Arrange
             const userData = {email: 'test@email.com'}
-            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[mockUser] })
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[] })
 
             //Act & Assert
-            await expect(User.findByEmail(userData.email).rejects.toThrow('Unable to locate user.'))
+            await expect(User.findByEmail(userData.email))
+            .rejects.toThrow('Unable to locate user.')
+
+        })
+
+    })
+
+    
+    describe ('findById', () => {
+
+        it('should find user by id and return them', async () => {
+
+            //Arrange
+            const userData = {id: 1}
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockUser] })
+
+            //Act
+            const result = await User.findById(userData.id)
+
+            //Assert
+            expect(result).toBeInstanceOf(User)
+            expect(result).toHaveProperty('id', 1)
+            expect(db.query).toHaveBeenCalledWith(
+                "SELECT * FROM users WHERE id = $1;",
+                [userData.id]
+            )
+
+        })
+
+        it('should throw an error if cannot locate user', async () => {
+
+            //Arrange
+            const userData = {id: 1}
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[] })
+
+            //Act & Assert
+            await expect(User.findByEmail(userData.id))
+            .rejects.toThrow('Unable to locate user.')
 
         })
 
