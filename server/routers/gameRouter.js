@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { getQuestions, submitAnswer } = require("../controllers/gameController");
+const { getQuestions, submitQuiz } = require("../controllers/gameController");
 
-router.get("/questions", getQuestions);
-router.post("/answer", submitAnswer);
+router.get("/questions/:subjectId", getQuestions);
+router.post("/submit", submitQuiz);
 module.exports = router;

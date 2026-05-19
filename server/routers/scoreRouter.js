@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const {saveScore, getLeaderboard } = require("../controllers/scoreController");
+const { getLeaderboard, getDashboard } = require("../controllers/scoreController");
 
-router.post("/", saveScore);
-router.get("/", getLeaderboard);
+router.get("/leaderboard", getLeaderboard);
+router.get("/dashboard", getDashboard);
 module.exports = router;
