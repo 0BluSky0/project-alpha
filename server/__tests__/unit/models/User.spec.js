@@ -3,7 +3,22 @@ const db = require('../../../database/db')
 
 describe('User', () => {
 
-    beforeEach(() => jest.clearAllMocks())
+    let mockUser
+
+    beforeEach(() => {
+        jest.clearAllMocks()
+        mockUser = {
+            id: 1, 
+            username: 'testuser', 
+            email: 'test@email.com', 
+            password_hash: 'testhashedpassword',
+            role: 'student',
+            total_xp: 0,
+            level: 1,
+            created_at: new Date()
+        }
+    })
+
     afterAll(() => jest.resetAllMocks())
 
     describe ('create', () => {
@@ -12,17 +27,6 @@ describe('User', () => {
 
             // Arrange
             const userData = {username: 'testuser', email: 'test@email.com', hashedPassword: 'testhashedpassword'}
-            const mockUser = { 
-                id: 1, 
-                username: 'testuser', 
-                email: 'test@email.com', 
-                password_hash: 'testhashedpassword',
-                role: 'student',
-                total_xp: 0,
-                level: 1,
-                created_at: new Date()
-            }
-
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockUser]})
 
             // Act
@@ -49,6 +53,41 @@ describe('User', () => {
             //Act & Assert
             await expect (User.create(userData.username, userData.email, userData.hashedPassword))
             .rejects.toThrow('User could not be created.')
+
+        })
+
+    })
+
+
+    describe ('findByEmail', () => {
+
+        it('should find the user by email and return them', async () => {
+            
+            //Arrange
+            const userData = {email: 'test@email.com'}
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockUser] })
+
+            //Act
+            const result = await User.findByEmail(userData.email)
+
+            //Assert
+            expect(result).toBeInstanceOf(User)
+            expect(result).toHaveProperty('email', 'test@email.com')
+            expect(db.query).toHaveBeenCalledWith(
+                "SELECT * FROM users WHERE email = $1;",
+                [userData.email]
+            )
+            
+        })
+
+        it('should throw an error if cannot locate user', async () => {
+
+            //Arrange
+            const userData = {email: 'test@email.com'}
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[mockUser] })
+
+            //Act & Assert
+            await expect(User.findByEmail(userData.email).rejects.toThrow('Unable to locate user.'))
 
         })
 
