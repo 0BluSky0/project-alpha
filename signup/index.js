@@ -50,18 +50,17 @@ function nextQuestion(currentQ) {
   nextQuestion.classList.add("active");
 }
 
-document.getElementById("finish-btn").addEventListener("click", (e) => {
-    window.location.href="../homepage/index.html"
-})
 
 document.getElementById("finish-btn").addEventListener("click", (e)=> finishQuiz());
 
 function finishQuiz() {
-//need to change this to talk to database
-  localStorage.setItem("userData", JSON.stringify(userData));
-  localStorage.setItem("theme", userData.theme);
-
-  setTheme(userData.theme);
-
-  window.location.href = "../homepage/index.html";
+  try {
+    localStorage.setItem("userData", JSON.stringify(userData));
+    localStorage.setItem("theme", userData.theme);
+    setTheme(userData.theme);
+    window.location.href = "/client/homepage/index.html";
+  } catch (e) {
+    console.error("Error in finishQuiz:", e);
+    alert("An error occurred. Please try again.");
+  }
 }
