@@ -1,8 +1,22 @@
-const topic = localStorage.getItem("selectedTopic");
-if (topic) {
-  fetchQuestions(topic);
+const topicToId = {
+  'Ancient Egypt': 1,
+  'Ancient Greece': 2,
+};
+
+const topicMapping = {
+  ancient_egypt: "Ancient Egypt",
+  ancient_greece: "Ancient Greece",
+};
+
+const topicBase = localStorage.getItem("selectedTopic");
+
+const dbTopicName = topicMapping[topicBase] || topicBase;
+
+
+if (dbTopicName) {
+  fetchQuestions(dbTopicName);
   document.getElementById("topic-title").textContent =
-    topic.charAt(0).toUpperCase() + topic.slice(1);
+    dbTopicName.charAt(0).toUpperCase() + dbTopicName.slice(1);
 } else document.getElementById("topic-title").textContent = "Challenge";
 
 document.getElementById("back").addEventListener("click", (e) => {
@@ -20,10 +34,7 @@ function setTheme(themeName) {
   localStorage.setItem("theme", themeName);
 }
 
-const topicToId = {
-  ancientEgypt: 1,
-  ancientGreece: 2,
-};
+
 
 async function fetchQuestions(topic) {
   try {
@@ -36,7 +47,7 @@ async function fetchQuestions(topic) {
       `http://localhost:3000/game/questions/${topicId}`,
     );
     if (!response.ok) {
-      throw new Error("failed to fetch questions");
+      throw new Error("failed to fetch questions:", response.status);
     }
     const allQuestions = await response.json();
 
@@ -105,7 +116,7 @@ async function fetchQuestions(topic) {
       }),
     );
   } catch (error) {
-    console.error("Error fetching questions");
+    console.error("Error fetching questions:", error);
     document.getElementById("questions-container").innerHTML =
       `<p>Failed to load questions</p>`;
   }
