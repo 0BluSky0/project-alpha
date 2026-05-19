@@ -51,3 +51,15 @@
   --text-light: #A52A2A;
   --accent: #4ECDC4;  
 }
+
+#dark-btn{
+background-color: black;
+}
+
+#light-btn{
+background-color: black;
+}
+
+#ocean-btn{
+background-color: black;
+}
