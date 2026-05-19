@@ -1,5 +1,62 @@
+:root {
+  --primary: #5D9CEC;
+  --secondary: #7EC0EE;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="dark"]{
+  --primary: #8A2BE2;
+  --secondary: #4B0082;
+  --background: #121212;
+  --text: #FFFFFF;
+  --text-light: #000000;
+  --accent: #FFD700;
+}
+
+[data-theme="light"]{
+  --primary: #5D9CEC;
+  --secondary: #7EC0EE;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="ocean"]{
+  --primary: #03045eff;
+  --secondary: #0077b6ff;
+  --background: #90e0efff;
+  --text: rgb(4, 4, 47);
+  --text-light: #caf0f8ff;
+  --accent: #00b4d8ff ;
+}
+
+[data-theme="forest"] {
+  --primary: #2E8B57;      
+  --secondary: #3CB371;    
+  --background: #F0F8FF;   
+  --text: #2F4F4F;         
+  --text-light: #556B2F;  
+  --accent: #CD853F;  
+}
+
+[data-theme="sunset"] {
+  --primary: #FF6B6B;
+  --secondary: #FF8E53; 
+  --background: #FFF5E6; 
+  --text: #8B0000;  
+  --text-light: #A52A2A;
+  --accent: #4ECDC4;  
+}
+
+
+
 body {
-  background-color: rgba(4, 12, 85, 0.836);
+  background-color: var(--background);
+  color: var(--text);
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
@@ -18,6 +75,21 @@ body {
   margin: 5vw;
 }
 
+button {
+  background-color: var(--primary);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--secondary);
+  transform: scale(1.05);
+}
+
 #streak,
 #logout {
   display: flex;
@@ -27,25 +99,18 @@ body {
 }
 
 #streak {
-  color: gold;
+  color: var(--accent);
   font-weight: bold;
   font-size: 30px;
 }
 
 #logout {
-  background-color: #a7e8f2;
   text-align: center;
   padding: 20px;
   border: 0;
   border-radius: 40px;
   line-height: 10px;
   margin-top: 2vw;
-}
-
-#logout:hover {
-  background-color: #097f91;
-  color: white;
-  transform: scale(1.05);
 }
 
 .topic {
@@ -65,7 +130,7 @@ body {
 .icon-container {
   width: 30vw;
   height: 30vw;
-  background-color: #a7e8f2;
+  background-color: var(--secondary);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -73,7 +138,7 @@ body {
   margin-bottom: 10px;
   padding: 10px;
   border-style: solid;
-  border-color: black;
+  border-color: var(--accent);
 }
 
 .icon {
@@ -85,7 +150,7 @@ body {
   justify-content: center;
   align-items: center;
   border-style: solid;
-  border-color: black;
+  border-color: var(--accent);
 }
 
 .icon img {
@@ -104,7 +169,7 @@ body {
 }
 
 .practice, .challenge, .scores {
-    width: 70px;
+  width: 70px;
   height: 70px;
   border-radius: 50%;
   display: flex;
@@ -114,46 +179,19 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   font-weight: 600;
+  margin:3px;
 }
 
-.practice {
-  background: linear-gradient(to bottom, #4CAF50, #2E7D32);
-}
-
-.practice:hover {
-  color: white;
-  transform: scale(1.05);
-}
-
-.challenge {
-  background: linear-gradient(to bottom, #FF9800, #E65100);
-}
-
-.challenge:hover {
-  background-color: rgb(255, 167, 2);
-  color: white;
-  transform: scale(1.05);
-}
-
-.scores {
-  background: linear-gradient(to bottom, #8A2BE2, #6A1B9A);
-}
-
-.scores:hover {
-  background-color: rgb(128, 0, 128);
-  color: white;
-  transform: scale(1.05);
-}
 
 #navbar {
-  background-color: #a7e8f2;
+  background-color: var(--secondary);
   font-size: clamp(14px, 2vw, 18px);
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin: 0;
   padding: 16px 0;
-  color: black;
+  color: var(--text);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -165,12 +203,12 @@ body {
 
 #profile,
 #leaderboard {
-  color: black;
+  color: var(--text);
   text-decoration: none;
 }
 
 #profile:hover,
 #leaderboard:hover {
   text-decoration: underline;
-  color: white;
+  color: var(--text-light);
 }
