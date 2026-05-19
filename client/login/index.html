@@ -8,17 +8,25 @@
     <title>Login</title>
 </head>
 <body>
-    <form id="login-form">
+    <a id="backButton" href="../homepage/index.html">Back</a>
+
+    <section id="loginSection">
+        <form id="login-form">
+            <h1>Login</h1>
+
             <fieldset>
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username" required>
             </fieldset>
+
             <fieldset>
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" required>
             </fieldset>
             <input type="submit" value="Log in">
+
+            <p id="signupText">No account? <a id="signupLink" href="../signup/index.html">Sign up here</a>.</p>
         </form>
-        <p>No account? <a href="./register.html">Sign up here</a>.</p>
+    </section>
 </body>
 </html>
