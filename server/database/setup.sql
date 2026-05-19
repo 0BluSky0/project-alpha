@@ -1,3 +1,4 @@
+-- USERS
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -6,38 +7,51 @@ CREATE TABLE IF NOT EXISTS users (
     role VARCHAR(10) DEFAULT 'student',
     total_xp INT DEFAULT 0,
     level INT DEFAULT 1,
+    colour_scheme VARCHAR(20) DEFAULT 'light' CHECK (colour_scheme IN ('dark', 'light', 'ocean', 'forest', 'sunset')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- SUBJECTS
 CREATE TABLE IF NOT EXISTS subjects (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) UNIQUE NOT NULL
 );
 
+-- QUESTIONS
 CREATE TABLE IF NOT EXISTS questions (
     id SERIAL PRIMARY KEY,
     subject_id INT REFERENCES subjects(id),
     question_text VARCHAR(255) NOT NULL,
+    question_type VARCHAR(20) DEFAULT 'multiple_choice',
     difficulty VARCHAR(10) DEFAULT 'medium',
     created_by INT REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS options (
+-- ANSWERS
+CREATE TABLE IF NOT EXISTS answers (
     id SERIAL PRIMARY KEY,
-    question_id INT REFERENCES questions(id),
-    option_text VARCHAR(255) NOT NULL,
+    question_id INT REFERENCES questions(id) ON DELETE CASCADE,
+    answer_text VARCHAR(255) NOT NULL,
     is_correct BOOLEAN NOT NULL
 );
 
+-- GAME SESSIONS
 CREATE TABLE IF NOT EXISTS game_sessions (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     subject_id INT REFERENCES subjects(id),
     score INT NOT NULL,
-    xp_earned INT NOT NULL
+    xp_earned INT NOT NULL,
+    played_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-// Insert questions (mix of types)
-INSERT INTO questions (topic_id, question_text, question_type) VALUES
+
+-- SEED SUBJECTS
+INSERT INTO subjects (name) VALUES
+('Ancient Egypt'),
+('Ancient Greece');
+
+-- SEED QUESTIONS
+INSERT INTO questions (subject_id, question_text, question_type) VALUES
 (1, 'What were the tombs of Egyptian pharaohs called?', 'multiple_choice'),
 (1, 'The Nile flows through Ancient Egypt', 'true_false'),
 (1, 'Name the Egyptian god of the dead', 'input'),
@@ -46,7 +60,7 @@ INSERT INTO questions (topic_id, question_text, question_type) VALUES
 (2, 'The first Olympics were held in Athens', 'true_false'),
 (2, 'Name the famous temple on the Acropolis', 'input');
 
-// Insert answers (multiple choice and true/false only, input marked separately)
+-- SEED ANSWERS
 INSERT INTO answers (question_id, answer_text, is_correct) VALUES
 (1, 'Pyramids', true), (1, 'Temples', false), (1, 'Ziggurats', false), (1, 'Catacombs', false),
 (2, 'True', true), (2, 'False', false),
