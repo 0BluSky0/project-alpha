@@ -9,3 +9,11 @@ document.querySelectorAll(".challenge").forEach(button => {
 document.getElementById("logout").addEventListener("click", (e) => {
     window.location.href="../login/index.html"
 })
+
+document.querySelectorAll(".practice").forEach(button => {
+    button.addEventListener("click", (e)=> {
+        const topic = e.target.getAttribute("data-topic")
+        localStorage.setItem("selectedTopic", topic)
+        window.location.href="../practice/index.html"
+    })
+})
