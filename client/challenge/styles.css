@@ -1,5 +1,59 @@
+:root {
+  --primary: #5d9cec;
+  --secondary: #7ec0ee;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="dark"] {
+  --primary: #8a2be2;
+  --secondary: #4b0082;
+  --background: #121212;
+  --text: #ffffff;
+  --text-light: #000000;
+  --accent: #ffd700;
+}
+
+[data-theme="light"] {
+  --primary: #5d9cec;
+  --secondary: #7ec0ee;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="ocean"] {
+  --primary: #03045eff;
+  --secondary: #0077b6ff;
+  --background: #90e0efff;
+  --text: #caf0f8ff;
+  --text-light: rgb(4, 4, 47);
+  --accent: #00b4d8ff;
+}
+
+[data-theme="forest"] {
+  --primary: #2e8b57;
+  --secondary: #3cb371;
+  --background: #f0f8ff;
+  --text: #2f4f4f;
+  --text-light: #556b2f;
+  --accent: #cd853f;
+}
+
+[data-theme="sunset"] {
+  --primary: #ff6b6b;
+  --secondary: #ff8e53;
+  --background: #fff5e6;
+  --text: #8b0000;
+  --text-light: #a52a2a;
+  --accent: #4ecdc4;
+}
+
 body {
-  background-color: rgba(4, 12, 85, 0.836);
+  background-color: var(--background);
   font-family: "Poppins", sans-serif;
 }
 

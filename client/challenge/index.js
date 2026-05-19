@@ -1,41 +1,153 @@
-const topic = localStorage.getItem("selectedTopic")
-if (topic){
-    fetchQuestions(topic)
-    document.getElementById("topic-title").textContent = topic.charAt(0).toUpperCase() + topic.slice(1)
-} else document.getElementById("topic-title").textContent = "Challenge"
-
+const topic = localStorage.getItem("selectedTopic");
+if (topic) {
+  fetchQuestions(topic);
+  document.getElementById("topic-title").textContent =
+    topic.charAt(0).toUpperCase() + topic.slice(1);
+} else document.getElementById("topic-title").textContent = "Challenge";
 
 document.getElementById("back").addEventListener("click", (e) => {
-    window.location.href="../homepage/index.html"
-})
+  window.location.href = "../homepage/index.html";
+});
 
+const topicToId = {
+  ancientEgypt: 1,
+  ancientGreece: 2,
+};
 
-async function fetchQuestions(topic){
-    try{
-        const response = await fetch(`api...${topic}`)
-        const allQuestions = await response.json()
-
-        const shuffledQuestions = allQuestions.sort(() => 0.5 - Math.random())
-        const randomQuestions = shuffledQuestions.slice(0,10)
-
-        const questionsContainer = document.getElementById("questions-container")
-        questionsContainer.innerHTML = ""
-
-        let index = 1
-        randomQuestions.forEach((question)=> {
-            const questionDiv = document.createElement("div")
-            questionDiv.className = "question"
-            questionDiv.innerHTML = `<h3>Question ${index}: ${question.text}</h3>
-            <div class = "options>
-            ${question.options.map(option => `<button>${option}</button>`).join('')}
-            </div>`
-
-            index++
-            questionsContainer.appendChild(questionDiv)
-            
-        })
-    } catch(error){
-        console.error("Error fetching questions:", error)
-        document.getElementById("questions-container").innerHTML = `<p>Failed to load questions</p>`
+async function fetchQuestions(topic) {
+  try {
+    const topicId = topicToId[topic];
+    if (!topicId) {
+      throw new Error(`couldn't find topic: ${topic}`);
     }
+
+    const response = await fetch(
+      `http://localhost:3000/game/questions/${topicId}`,
+    );
+    if (!response.ok) {
+      throw new Error("failed to fetch questions");
+    }
+    const allQuestions = await response.json();
+
+    const shuffledQuestions = allQuestions.sort(() => 0.5 - Math.random());
+    const randomQuestions = shuffledQuestions.slice(0, 10);
+
+    const questionsContainer = document.getElementById("questions-container");
+    questionsContainer.innerHTML = "";
+
+    let index = 1;
+    randomQuestions.forEach((question) => {
+      const questionDiv = document.createElement("div");
+      questionDiv.className = "question";
+      questionDiv.dataset.questionId = question.id;
+      questionDiv.dataset.questionType = question.question_type;
+
+      let questionHTML = `<h3>Question ${index}: ${question.question_text}</h3>`;
+
+      if (
+        question.question_type === "multiple_choice" ||
+        question.question_type === "true_false"
+      ) {
+        const options = question.answers
+          ? question.answers.map((answer) => answer.answer_text)
+          : [];
+        const optionsHTML = options
+          .map(
+            (option, i) => `
+  <button class="option-btn" data-option-index="${i}">
+    ${option}
+  </button>
+`,
+          )
+          .join("");
+
+        questionHTML += `
+  <div class="options">
+    ${optionsHTML}
+  </div>
+`;
+      } else if (question.question_type === "input") {
+        questionHTML += `
+          <div class="input-answer">
+            <input type="text" class="answer-input" placeholder="Your answer...">
+          </div>
+        `;
+      }
+
+      questionDiv.innerHTML = questionHTML;
+      questionsContainer.appendChild(questionDiv);
+      index++;
+    });
+
+    document.querySelectorAll(".option-btn").forEach((button) =>
+      button.addEventListener("click", (e) => {
+        const questionDiv = button.closest(".question");
+        const questionId = questionDiv.dataset.questionId;
+        const optionIndex = button.dataset.optionIndex;
+
+        questionDiv.querySelectorAll(".option-btn").forEach((btn) => {
+          btn.classList.remove("selected");
+        });
+        button.classList.add("selected");
+
+        questionDiv.dataset.selectedAnswer = optionIndex;
+      }),
+    );
+  } catch (error) {
+    console.error("Error fetching questions");
+    document.getElementById("questions-container").innerHTML =
+      `<p>Failed to load questions</p>`;
+  }
+}
+
+document.getElementById("submit-btn").addEventListener("click", submitQuiz);
+
+async function submitQuiz() {
+  const questions = document.querySelectorAll(".question");
+  const answers = [];
+
+  questions.forEach((questionDiv) => {
+    const questionId = questionDiv.dataset.questionId;
+    const questionType = questionDiv.dataset.questionType;
+
+    let answer;
+    if (questionType === "multiple_choice" || questionType === "true_false") {
+      answer = questionDiv.dataset.selectedAnswer;
+      if (answer === undefined) {
+        alert(
+          `Please answer question ${questionDiv.querySelector("h3").textContent}`,
+        );
+        throw new Error("Unanswered question");
+      }
+    } else if (questionType === "input") {
+        answer = questionDiv.querySelector('.answer-input').value.trim()
+        if(!answer) {
+            alert(`Please answer question ${questionDiv.querySelector('h3').textContent}`);
+        throw new Error("Unanswered question");
+        }
+    }
+    answers.push({
+        question_id: questionId,
+        answer:answer
+    })
+  });
+
+  try{
+    const response = await fetch('http://localhost:3000/game/submit',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({answers})
+    })
+    const data = await response.json()
+    if (response.ok){
+        alert(`Quiz submitted! You scores ${data.score}/${data.total} points`)
+        window.location.href="../homepage/index.html"
+    } else {
+        alert("Failed to submit quiz")
+    }
+  } catch(err){
+    console.error("Error submitting quiz")
+  }
 }
