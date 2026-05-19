@@ -212,3 +212,32 @@ button:hover {
   text-decoration: underline;
   color: var(--text-light);
 }
+
+.topic.locked .icon-container {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.topic.locked button {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevents clicks */
+}
+.topic.locked:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 100;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  z-index: 10;
+}
