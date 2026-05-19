@@ -21,9 +21,8 @@ const userData = {
   theme: "",
 };
 
-document.getElementById("next-btn-1").addEventListener("click", nextQuestion(1))
-
-document.getElementById("next-btn-2").addEventListener("click", nextQuestion(2))
+document.getElementById("next-btn-1").addEventListener("click", () => nextQuestion(1));
+document.getElementById("next-btn-2").addEventListener("click", () => nextQuestion(2));
 
 function nextQuestion(currentQ) {
   const currentQuestion = document.getElementById(`q${currentQ}`);
