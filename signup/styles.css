@@ -1,0 +1,53 @@
+:root {
+  --primary: #5D9CEC;
+  --secondary: #7EC0EE;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="dark"]{
+  --primary: #8A2BE2;
+  --secondary: #4B0082;
+  --background: #121212;
+  --text: #FFFFFF;
+  --text-light: #000000;
+  --accent: #FFD700;
+}
+
+[data-theme="light"]{
+  --primary: #5D9CEC;
+  --secondary: #7EC0EE;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="ocean"]{
+  --primary: #03045eff;
+  --secondary: #0077b6ff;
+  --background: #90e0efff;
+  --text: rgb(4, 4, 47);
+  --text-light: #caf0f8ff;
+  --accent: #00b4d8ff ;
+}
+
+[data-theme="forest"] {
+  --primary: #2E8B57;      
+  --secondary: #3CB371;    
+  --background: #F0F8FF;   
+  --text: #2F4F4F;         
+  --text-light: #556B2F;  
+  --accent: #CD853F;  
+}
+
+[data-theme="sunset"] {
+  --primary: #FF6B6B;
+  --secondary: #FF8E53; 
+  --background: #FFF5E6; 
+  --text: #8B0000;  
+  --text-light: #A52A2A;
+  --accent: #4ECDC4;  
+}
