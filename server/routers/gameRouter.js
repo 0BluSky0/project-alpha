@@ -1,6 +1,6 @@
 const express = require("express");
-const router = rxpress.Router();
-const {"getQuestions", getQuestions};
+const router = express.Router();
+const { getQuestions, submitAnswer } = require("../controllers/gameController");
 
 router.get("/questions", getQuestions);
 router.post("/answer", submitAnswer);
