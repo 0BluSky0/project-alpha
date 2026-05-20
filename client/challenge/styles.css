@@ -57,6 +57,29 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes correctPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes incorrectShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 #back {
   margin-left: 1vw;
   margin-top: 1vw;
@@ -107,6 +130,8 @@ body {
   width: 80vw;
   justify-content: center;
   padding:20px;
+  opacity: 1;
+  transition: opacity 0.5s;
   
 }
 
@@ -121,6 +146,7 @@ body {
 .question h3 {
   margin-top: 0;
   color: var(--text);
+  animation: bounce 0.5s ease-out;
 }
 
 .options {
@@ -138,16 +164,29 @@ body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
 }
 
 .option-btn:hover {
   background-color: var(--primary);
 }
 
-.option-btn.selected{
-  background-color:var(--accent);
+.option-btn.selected {
+  background-color: #2196F3 !important;
+  color: white;
   font-weight:bold;
+}
+
+.option-btn.correct {
+  background-color: #4CAF50 !important;
+  color: white;
+  animation: correctPulse 0.5s;
+}
+
+.option-btn.incorrect {
+  background-color: #F44336 !important;
+  color: white;
+  animation: incorrectShake 0.5s;
 }
 
 .input-answer{
@@ -196,4 +235,17 @@ body {
 
 .submit-btn:hover {
   background-color: var(--background);
+}
+
+#topic-title {
+  animation: bounce 1s ease-in-out;
+}
+
+.option-btn {
+  transition: all 0.2s;
+}
+
+.option-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

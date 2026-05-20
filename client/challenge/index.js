@@ -91,21 +91,22 @@ function displayCurrentQuestion() {
     return;
   }
 
-  let questionHTML = `<div class="question" data-question-id="${question.id}" data-question-type="${question.question_type}">
-      <h3>Question ${currentQuestionIndex + 1}: ${question.question_text}</h3>`;
+  // Fade out animation (for transition between questions)
+  container.style.opacity = 0;
 
-  const savedAnswer = userAnswers[currentQuestionIndex];
+  let questionHTML = `
+    <div class="question" data-question-id="${question.id}" data-question-type="${question.question_type}">
+      <h3>Question ${currentQuestionIndex + 1}: ${question.question_text}</h3>
+  `;
 
   if (question.question_type === "multiple_choice" || question.question_type === "true_false") {
-    const options = question.answers || question.options || [];
+    const options = question.options || [];
     const optionsHTML = options
-      .map(
-        (answer, i) => `
-      <button class="option-btn" data-option-index="${i}">
-        ${answer.option_text || answer}
-      </button>
-    `,
-      )
+      .map((answer, i) => `
+        <button class="option-btn" data-option-index="${i}">
+          ${answer.option_text || answer}
+        </button>
+      `)
       .join("");
 
     questionHTML += `
@@ -121,41 +122,66 @@ function displayCurrentQuestion() {
     `;
   }
 
-
   questionHTML += `</div>`;
   container.innerHTML = questionHTML;
 
   const questionDiv = document.querySelector(`.question[data-question-id="${question.id}"]`);
 
+  // Fade in animation
+  setTimeout(() => {
+    container.style.transition = "opacity 0.5s";
+    container.style.opacity = 1;
+  }, 10);
 
-  if (savedAnswer !== undefined) {
-    if (question.question_type === "multiple_choice" || question.question_type === "true_false") {
-      const optionBtn = questionDiv.querySelector(`.option-btn[data-option-index="${savedAnswer}"]`);
-      if (optionBtn) {
-        optionBtn.classList.add("selected");
-        questionDiv.dataset.selectedAnswer = savedAnswer;
-      }
-    } else if (question.question_type === "input") {
-      const inputField = questionDiv.querySelector(".answer-input");
-      if (inputField) {
-        inputField.value = savedAnswer;
-      }
-    }
-  }
-
+  // Click handler for multiple choice/true false
   if (question.question_type === "multiple_choice" || question.question_type === "true_false") {
     document.querySelectorAll(".option-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
+        // Reset all buttons
         questionDiv.querySelectorAll(".option-btn").forEach((btn) => {
-          btn.classList.remove("selected");
+          btn.classList.remove("selected", "correct", "incorrect");
+          btn.innerHTML = btn.textContent.trim(); // Reset text
         });
+
+        // Mark selected button
         button.classList.add("selected");
         questionDiv.dataset.selectedAnswer = button.dataset.optionIndex;
         userAnswers[currentQuestionIndex] = button.dataset.optionIndex;
+
+        // Check if correct
+        const isCorrect = question.options[button.dataset.optionIndex]?.is_correct || false;
+
+        // Add visual feedback
+        if (isCorrect) {
+          button.classList.add("correct");
+          button.innerHTML += " ✅";
+          // Trigger confetti (if you've added the confetti library)
+          if (typeof confetti === 'function') {
+            confetti({
+              particleCount: 100,
+              spread: 70,
+              origin: { y: 0.6 }
+            });
+          }
+        } else {
+          button.classList.add("incorrect");
+          button.innerHTML += " ❌";
+
+          // Show correct answer
+          const correctIndex = question.options.findIndex(opt => opt.is_correct);
+          if (correctIndex !== -1 && correctIndex != button.dataset.optionIndex) {
+            const correctBtn = questionDiv.querySelector(`.option-btn[data-option-index="${correctIndex}"]`);
+            if (correctBtn) {
+              correctBtn.classList.add("correct");
+              correctBtn.innerHTML += " ✅";
+            }
+          }
+        }
       });
     });
   }
 
+  // Input field handler
   if (question.question_type === "input") {
     const inputField = questionDiv.querySelector('.answer-input');
     if (inputField) {
@@ -257,7 +283,7 @@ async function submitQuiz() {
 
     const data = await response.json();
     if (response.ok) {
-      alert(`Quiz submitted! You scored ${data.score}/${totalQuestions} points`);
+      alert(`Quiz submitted! You scored ${data.score}/${totalQuestions} points!`);
       window.location.href = "../homepage/index.html";
     } else {
       alert(`Failed to submit quiz: ${data.error || 'Unknown error'}`);

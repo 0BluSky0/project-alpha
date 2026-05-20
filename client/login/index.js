@@ -25,7 +25,10 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     if (response.status == 200) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
-        window.location.assign("../homepage/index.html");
+        const topic = ["ancient_egypt", "ancient_greece"]
+        const randomTopic = topics[Math.floor(Math.random() * topics.length)]
+        localStorage.setItem("selectedTopic", randomTopic);
+        window.location.href = `../challenge/index.html?topic=${randomTopic}`;
       } else {
         alert(data.error);
       }
