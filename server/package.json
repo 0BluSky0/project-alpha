@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seed-db": "node ./database/db.js",
+    "seed-db": "node ./database/setup.js",
     "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
     "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose",
     "coverage": "jest --coverage --testPathPattern=/unit/"
