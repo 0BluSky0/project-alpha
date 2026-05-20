@@ -37,7 +37,7 @@ Eureka! was created to respond to these challenges by offering an interactive an
 ## Process
 The frontend for Eureka! was developed through an iterative design and implementation process with a strong focus on usability, accessibility and student engagement.
 
-We began by analysing the project brief and stakeholder needs to understand the main problem the application needed to solve. From this, we identified that the frontend had to feel more engaging and rewarding than traditional classroom quiz tools while still remainin simple and easy to use for students in a school environment.
+We began by analysing the project brief and stakeholder needs to understand the main problem the application needed to solve. From this, we identified that the frontend had to feel more engaging and rewarding than traditional classroom quiz tools while still remaining simple and easy to use for students in a school environment.
 
 After the initial planning stage, we produced wireframes to map out the structure and user journey of the application. These early designs helped us define the core pages of the platform including signup, login, homepage, quiz, leaderboard and profile views. The wireframes also guided layout decisions, visual hierarchy and how students would move through the platform from one stage to the next.
 
