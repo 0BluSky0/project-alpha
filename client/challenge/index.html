@@ -9,14 +9,19 @@
   </head>
   <body>
     <div id="back-button">
-        <button id = "back">Back</button>
+      <button id="back">Back</button>
     </div>
     <div id="challenge-container">
       <div id="title-container">
         <h1 id="topic-title">Loading challenge...</h1>
       </div>
-      <div id="questions-container"></div>
-      <button id="submit-btn" class="submit-btn">Submit</button>
+      <div id="current-question-container">
+      </div>
+      <div id="navigation-buttons">
+        <button id="prev-btn" class="nav-btn" disabled>Previous</button>
+        <button id="next-btn" class="nav-btn">Next</button>
+      </div>
+      <button id="submit-btn" class="submit-btn" style="display:none;">Submit</button>
     </div>
   </body>
 </html>
