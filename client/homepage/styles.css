@@ -1,0 +1,243 @@
+:root {
+  --primary: #5D9CEC;
+  --secondary: #7EC0EE;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="dark"]{
+  --primary: #8A2BE2;
+  --secondary: #4B0082;
+  --background: #121212;
+  --text: #FFFFFF;
+  --text-light: #000000;
+  --accent: #FFD700;
+}
+
+[data-theme="light"]{
+  --primary: #5D9CEC;
+  --secondary: #7EC0EE;
+  --background: #d1eff7;
+  --text: #333333;
+  --text-light: #555555;
+  --accent: #e8ca1e;
+}
+
+[data-theme="ocean"]{
+  --primary: #03045eff;
+  --secondary: #0077b6ff;
+  --background: #90e0efff;
+  --text: rgb(4, 4, 47);
+  --text-light: #caf0f8ff;
+  --accent: #00b4d8ff ;
+}
+
+[data-theme="forest"] {
+  --primary: #2E8B57;      
+  --secondary: #3CB371;    
+  --background: rgba(144, 238, 144, 0.676);   
+  --text: #2F4F4F;         
+  --text-light: #556B2F;  
+  --accent: #CD853F;  
+}
+
+[data-theme="sunset"] {
+  --primary: #FF6B6B;
+  --secondary: #FF8E53; 
+  --background: #FFF5E6; 
+  --text: #8B0000;  
+  --text-light: #A52A2A;
+  --accent: #4ECDC4;  
+}
+
+
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 80px;
+}
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+}
+
+#page {
+  margin: 5vw;
+}
+
+button {
+  background-color: var(--primary);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--secondary);
+  transform: scale(1.05);
+}
+
+#streak,
+#logout {
+  display: flex;
+  height: 50px;
+  width: auto;
+  font-size: 30px;
+}
+
+#streak {
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 30px;
+}
+
+#logout {
+  text-align: center;
+  padding: 20px;
+  border: 0;
+  border-radius: 40px;
+  line-height: 10px;
+  margin-top: 2vw;
+}
+
+.topic {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  flex-direction: column;
+  width: 30vw;
+}
+
+.topic-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.icon-container {
+  width: 30vw;
+  height: 30vw;
+  background-color: var(--secondary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.icon {
+  width: 25vw;
+  height: 25vw;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.options {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.practice, .challenge, .scores {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin:3px;
+}
+
+
+#navbar {
+  background-color: var(--secondary);
+  font-size: clamp(14px, 2vw, 18px);
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0;
+  padding: 16px 0;
+  color: var(--text);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  z-index: 1000; 
+}
+
+#profile,
+#leaderboard {
+  color: var(--text);
+  text-decoration: none;
+}
+
+#profile:hover,
+#leaderboard:hover {
+  text-decoration: underline;
+  color: var(--text-light);
+}
+
+.topic.locked .icon-container {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.topic.locked button {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* Prevents clicks */
+}
+.topic.locked:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 100;
+}
+
+.lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  z-index: 10;
+}
