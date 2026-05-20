@@ -26,7 +26,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
         const topic = ["ancient_egypt", "ancient_greece"]
-        const randomTopic = topics[Math.floor(Math.random() * topics.length)]
+        const randomTopic = topic[Math.floor(Math.random() * topic.length)]
         localStorage.setItem("selectedTopic", randomTopic);
         window.location.href = `../challenge/index.html?topic=${randomTopic}`;
       } else {
