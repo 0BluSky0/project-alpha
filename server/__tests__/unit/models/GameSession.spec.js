@@ -83,15 +83,17 @@ describe('GameSession', () => {
 
         })
 
-        it('should throw an error if no sessions are found for the user', async () => {
+        it('should return an empty array if no sessions are found for the user', async () => {
 
             //Arrange
             const sessionData = { userId: 1, limit: 10 }
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [] })
 
-            //Act & Assert
-            await expect(GameSession.getByUser(sessionData.userId, sessionData.limit))
-                .rejects.toThrow('No sessions found for this user.')
+            //Act
+            const result = await GameSession.getByUser(sessionData.userId, sessionData.limit)
+
+            //Assert
+            expect(result).toEqual([])
 
         })
 

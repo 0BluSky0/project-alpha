@@ -15,6 +15,7 @@ describe('User', () => {
             role: 'student',
             total_xp: 0,
             level: 1,
+            colour_scheme: 'light',
             created_at: new Date()
         }
     })
@@ -171,7 +172,7 @@ describe('User', () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[] })
 
             //Act & Assert
-            await expect(User.addXP(userData.userId))
+            await expect(User.addXP(userData.userId, userData.xpToAdd))
             .rejects.toThrow('Unable to update XP.')
 
         })
@@ -198,6 +199,43 @@ describe('User', () => {
                 "SELECT id, username, total_xp, level FROM users ORDER BY total_xp DESC LIMIT $1;",
                 [userData.limit]
             )
+
+        })
+
+    })
+
+
+    describe ('updateColourScheme', () => {
+
+        it('should update colour scheme and return the user', async () => {
+
+            //Arrange
+            const userData = { userId: 1, colourScheme: 'dark' }
+            const updatedMockUser = { ...mockUser, colour_scheme: 'dark' }
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [updatedMockUser] })
+
+            //Act
+            const result = await User.updateColourScheme(userData.userId, userData.colourScheme)
+
+            //Assert
+            expect(result).toBeInstanceOf(User)
+            expect(result).toHaveProperty('colour_scheme', 'dark')
+            expect(db.query).toHaveBeenCalledWith(
+                'UPDATE users SET colour_scheme = $2 WHERE id = $1 RETURNING *;',
+                [userData.userId, userData.colourScheme]
+            )
+
+        })
+
+        it('should throw an error if colour scheme cannot be updated', async () => {
+
+            //Arrange
+            const userData = { userId: 1, colourScheme: 'dark' }
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [] })
+
+            //Act & Assert
+            await expect(User.updateColourScheme(userData.userId, userData.colourScheme))
+            .rejects.toThrow('Unable to update colour scheme.')
 
         })
 

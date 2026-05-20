@@ -24,10 +24,6 @@ class GameSession {
       [userId, limit]
     );
 
-    if (response.rows.length === 0) {
-      throw new Error('No sessions found for this user.');
-    }
-
     return response.rows.map(g => new GameSession(g));
   }
 }
