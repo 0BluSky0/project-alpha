@@ -214,6 +214,19 @@ body {
   
 }
 
+.answer-input{
+  margin-top:15px
+}
+
+.answer-input input{
+  width:95%;
+  padding:10px;
+  border: 1px solid var(--primary);
+  border-radius:5px;
+  font-size:15px;
+  
+}
+
 #navigation-buttons {
   display: flex;
   justify-content: space-between;

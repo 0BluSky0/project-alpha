@@ -116,7 +116,7 @@ function displayCurrentQuestion() {
     `;
   } else if (question.question_type === "input") {
     questionHTML += `
-      <div class="input-answer">
+      <div class="answer-input">
         <input type="text" class="answer-input" placeholder="Your answer...">
       </div>
     `;
@@ -127,35 +127,36 @@ function displayCurrentQuestion() {
 
   const questionDiv = document.querySelector(`.question[data-question-id="${question.id}"]`);
 
-  // Fade in animation
+  
   setTimeout(() => {
     container.style.transition = "opacity 0.5s";
     container.style.opacity = 1;
   }, 10);
 
-  // Click handler for multiple choice/true false
+  
   if (question.question_type === "multiple_choice" || question.question_type === "true_false") {
     document.querySelectorAll(".option-btn").forEach((button) => {
       button.addEventListener("click", (e) => {
+
         // Reset all buttons
         questionDiv.querySelectorAll(".option-btn").forEach((btn) => {
           btn.classList.remove("selected", "correct", "incorrect");
           btn.innerHTML = btn.textContent.trim(); // Reset text
         });
 
-        // Mark selected button
+        
         button.classList.add("selected");
         questionDiv.dataset.selectedAnswer = button.dataset.optionIndex;
         userAnswers[currentQuestionIndex] = button.dataset.optionIndex;
 
-        // Check if correct
+       
         const isCorrect = question.options[button.dataset.optionIndex]?.is_correct || false;
 
-        // Add visual feedback
+        
         if (isCorrect) {
           button.classList.add("correct");
           button.innerHTML += " ✅";
-          // Trigger confetti (if you've added the confetti library)
+          
           if (typeof confetti === 'function') {
             confetti({
               particleCount: 100,
@@ -181,7 +182,7 @@ function displayCurrentQuestion() {
     });
   }
 
-  // Input field handler
+ 
   if (question.question_type === "input") {
     const inputField = questionDiv.querySelector('.answer-input');
     if (inputField) {

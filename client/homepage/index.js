@@ -19,7 +19,6 @@ document.getElementById("logout").addEventListener("click", (e) => {
 });
 
 
-
 function displayWelcomeMessage(){
   const welcomeMessage = document.getElementById("welcome-message")
   const username = localStorage.getItem("username")

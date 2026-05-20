@@ -102,7 +102,7 @@ button {
   border: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  font-weight: 600;
+  font-weight: 500;
   margin: 3px;
 }
 
@@ -111,29 +111,40 @@ button:hover {
   transform: scale(1.05);
 }
 
+
 #dark-btn {
   background-color: #8a2be2;
   color: #ffffff;
+  font-size: 10px;
 }
 
 #light-btn {
   background-color: #5d9cec;
   color: #333333;
+  font-size: 10px;
 }
 
 #ocean-btn {
   background-color: #03045eff;
   color: #caf0f8ff;
+  font-size: 10px;
 }
 
 #forest-btn {
   background-color: #2e8b57;
   color: #2f4f4f;
+  font-size: 10px;
 }
+
 
 #sunset-btn {
   background-color: #ff6b6b;
   color: #8b0000;
+  font-size: 10px;
+}
+
+#finish-btn{
+  font-size:8px;
 }
 
 .next-btn {
