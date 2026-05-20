@@ -249,7 +249,7 @@ async function submitQuiz() {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ requestBody }),
+      body: JSON.stringify(requestBody),
     });
 
     console.log(requestBody)
