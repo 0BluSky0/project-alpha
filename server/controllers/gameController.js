@@ -1,6 +1,6 @@
-const Question = require('../models/question');
-const Option = require('../models/option');
-const GameSession = require('../models/gameSession');
+const Question = require('../models/Question');
+const Option = require('../models/Option');
+const GameSession = require('../models/GameSession');
 const User = require('../models/User');
 
 async function getQuestions(req, res) {
