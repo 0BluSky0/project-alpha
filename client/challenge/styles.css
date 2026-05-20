@@ -52,12 +52,24 @@
   --accent: #4ecdc4;
 }
 
-body {
-  background-color: var(--background);
-  font-family: "Poppins", sans-serif;
+:root {
+  --font-heading: 'Fredoka One', cursive;
+  --font-body: 'Comic Neue', cursive;
+  --font-button: 'Press Start 2P', cursive;
 }
 
-/* Animations */
+h1, h2, h3, #topic-title {
+  font-family: var(--font-heading);
+}
+
+body, p, a, .question, .options, button, .btn, .option-btn{
+  font-family: var(--font-button);
+}
+
+body {
+  background-color: var(--background);
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

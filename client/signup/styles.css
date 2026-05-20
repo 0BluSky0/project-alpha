@@ -52,10 +52,23 @@
   --accent: #4ecdc4;
 }
 
+:root {
+  --font-heading: 'Fredoka One', cursive;
+  --font-body: 'Comic Neue', cursive;
+  --font-button: 'Press Start 2P', cursive;
+}
+
+h1, h2, h3, #topic-title {
+  font-family: var(--font-heading);
+}
+
+body, p, a, .question, .options, button, .btn, .option-btn{
+  font-family: var(--font-button);
+}
+
 body {
   background-color: var(--secondary);
   color: var(--text);
-  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   padding-bottom: 80px;
