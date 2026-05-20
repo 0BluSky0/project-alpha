@@ -14,11 +14,22 @@ class User {
   }
 
   static async create(username, email, hashedPassword) {
-    const response = await db.query(
-      'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING *;',
-      [username, email, hashedPassword]
-    );
-    return new User(response.rows[0]);
+    try {
+      
+      const response = await db.query(
+        'INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING *;',
+        [username, email, hashedPassword]
+      )
+
+      if(response.rows.length === 0) {
+        throw new Error('User could not be created.')
+      }
+      return new User(response.rows[0]);
+
+    } catch (error) {
+      throw new Error(error.message)
+    }
+
   }
 
   static async findByEmail(email) {
