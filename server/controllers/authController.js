@@ -10,7 +10,8 @@ async function register(req, res) {
         const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
         data["password_hash"] = await bcrypt.hash(data.password, salt);
         const user = await User.create(data.username, data.email, data["password_hash"]);
-        res.status(201).json(user);
+        const { password_hash, ...safeUser } = user;
+        res.status(201).json(safeUser);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }

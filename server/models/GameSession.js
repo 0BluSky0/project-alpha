@@ -15,6 +15,9 @@ class GameSession {
       [userId, subjectId, score, xpEarned]
     );
 
+    if (response.rows.length === 0) {
+      throw new Error('Game session could not be created.');
+    }
     return new GameSession(response.rows[0]);
   }
 
