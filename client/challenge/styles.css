@@ -130,7 +130,7 @@ body {
   margin-top: 10px;
 }
 
-.option-button {
+.option-btn {
   padding: 10px;
   background-color: var(--secondary);
   color:var(--text);
@@ -141,7 +141,7 @@ body {
   transition: background-color 0.3s;
 }
 
-.option-button:hover {
+.option-btn:hover {
   background-color: var(--primary);
 }
 
@@ -155,11 +155,12 @@ body {
 }
 
 .input-answer input{
-  width:100%;
+  width:95%;
   padding:10px;
   border: 1px solid var(--primary);
   border-radius:5px;
   font-size:15px;
+  
 }
 
 #navigation-buttons {
