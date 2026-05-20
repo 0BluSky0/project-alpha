@@ -114,18 +114,6 @@ describe('GameSession', () => {
 
         })
 
-        // it('should throw an error if the database fails', async () => {
-
-        //     //Arrange
-        //     const sessionData = { userId: 1, limit: 10 }
-        //     jest.spyOn(db, 'query').mockRejectedValueOnce(new Error('Database error'))
-
-        //     //Act & Assert
-        //     await expect(GameSession.getByUser(sessionData.userId, sessionData.limit))
-        //         .rejects.toThrow('Database error')
-
-        // })
-
     })
 
 })
