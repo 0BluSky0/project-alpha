@@ -59,7 +59,24 @@ body {
   margin: 0;
   padding: 0;
   padding-bottom: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+
+.quiz-container {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  display:flex;
+  justify-content:center;
+}
+
 
 button {
   border: none;
@@ -111,15 +128,6 @@ button:hover {
   color: var(--text);
 }
 
-.quiz-container {
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 90%;
-  max-width: 500px;
-  text-align: center;
-}
 
 .quiz-container h1 {
   color: var(--primary);

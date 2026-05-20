@@ -62,17 +62,6 @@ function nextQuestion(currentQ) {
 
 document.getElementById("finish-btn").addEventListener("click", (e)=> finishQuiz());
 
-function finishQuiz() {
-  try {
-    localStorage.setItem("userData", JSON.stringify(userData));
-    localStorage.setItem("theme", userData.theme);
-    setTheme(userData.theme);
-    window.location.href = "/client/homepage/index.html";
-  } catch (e) {
-    console.error("Error in finishQuiz:", e);
-    alert("An error occurred. Please try again.");
-  }
-}
 
 async function finishQuiz(){
   try{
@@ -90,22 +79,23 @@ async function finishQuiz(){
       method: "POST",
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application.json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(requestBody)
     })
     const data = await response.json()
 
-    if(response.ok){
-      window.location.href = "/client/login/index.html"
+    if (response.ok) {
+      window.location.href = "/client/login/index.html";
     } else {
-      console.error( "Failed to register. Please try again.")
+      const errorMessage = data.error || "Failed to register. Please try again.";
+      console.error("Backend error:", errorMessage);
+      alert(errorMessage);
     }
-  } catch(err){
-    console.error("Error in finishQuiz")
-    alert("An error occurred. Please try again")
+  } catch (err) {
+    console.error("Network or frontend error:", err);
+    alert("A network error occurred. Please check the console for details.");
   }
 }
-
 
 document.getElementById("login-btn").addEventListener("click", ()=> window.location.href="/client/login/index.html")

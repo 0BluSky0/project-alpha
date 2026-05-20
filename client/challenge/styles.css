@@ -102,10 +102,12 @@ body {
   margin-bottom: 20px;
 }
 
-#questions-container {
+#current-question-container {
   display: flex;
   width: 80vw;
   justify-content: center;
+  padding:20px;
+  
 }
 
 .question {
@@ -148,12 +150,36 @@ body {
   font-weight:bold;
 }
 
-.answer-input{
+.input-answer{
+  margin-top:15px
+}
+
+.input-answer input{
   width:100%;
-  padding:100%;
+  padding:10px;
   border: 1px solid var(--primary);
   border-radius:5px;
   font-size:15px;
+}
+
+#navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0
+}
+
+.nav-btn {
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }
 
 .submit-btn{
