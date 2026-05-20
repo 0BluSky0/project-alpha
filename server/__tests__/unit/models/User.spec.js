@@ -1,7 +1,7 @@
 const User = require('../../../models/User')
 const db = require('../../../database/db')
 
-xdescribe('User', () => {
+describe('User', () => {
 
     let mockUser
 
@@ -21,7 +21,7 @@ xdescribe('User', () => {
 
     afterAll(() => jest.resetAllMocks())
 
-    xdescribe ('create', () => {
+    describe ('create', () => {
 
         it('should create a new user and return them', async () => {
 
@@ -123,7 +123,7 @@ xdescribe('User', () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[] })
 
             //Act & Assert
-            await expect(User.findByEmail(userData.id))
+            await expect(User.findById(userData.id))
             .rejects.toThrow('Unable to locate user.')
 
         })
@@ -171,8 +171,8 @@ xdescribe('User', () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[] })
 
             //Act & Assert
-            await expect(User.findByEmail(userData.userId))
-            .rejects.toThrow('Unable to locate user.')
+            await expect(User.addXP(userData.userId))
+            .rejects.toThrow('Unable to update XP.')
 
         })
 
@@ -188,27 +188,16 @@ xdescribe('User', () => {
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockUser] })
 
             //Act
-            const result = await User.findById(userData.limit)
+            const result = await User.getTopByXP(userData.limit)
 
             //Assert
-            expect(result).toBeInstanceOf(User)
-            expect(result).toHaveProperty('id', 1)
+            expect(result).toHaveLength(1)
+            expect(result[0]).toBeInstanceOf(User)
+            expect(result[0]).toHaveProperty('id', 1)
             expect(db.query).toHaveBeenCalledWith(
-                "SELECT * FROM users WHERE id = $1;",
-                [userData.id]
+                "SELECT id, username, total_xp, level FROM users ORDER BY total_xp DESC LIMIT $1;",
+                [userData.limit]
             )
-
-        })
-
-        it('should throw an error if cannot locate user', async () => {
-
-            //Arrange
-            const userData = {id: 1}
-            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows:[] })
-
-            //Act & Assert
-            await expect(User.findByEmail(userData.id))
-            .rejects.toThrow('Unable to locate user.')
 
         })
 

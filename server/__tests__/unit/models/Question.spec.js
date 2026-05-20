@@ -36,6 +36,19 @@ describe ('Question', () => {
 
         })
 
+
+        it('should throw an error if no questions are found', async () => {
+
+            //Arrange
+            const questionData = { subjectId: 1, limit: 10 }
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [] })
+
+            //Act & Assert
+            await expect(Question.getBySubject(questionData.subjectId, questionData.limit))
+                .rejects.toThrow('No questions available for this subject.')
+
+        })
+
     })
 
 })
