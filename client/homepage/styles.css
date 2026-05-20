@@ -90,6 +90,19 @@ button:hover {
   transform: scale(1.05);
 }
 
+.welcome-message {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+  color: var(--background);
+  padding: 10px;
+  background-color: var(--primary);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 #streak,
 #logout {
   display: flex;

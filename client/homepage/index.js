@@ -1,3 +1,10 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const savedTheme = localStorage.getItem("theme") || "light";
+  setTheme(savedTheme);
+  displayWelcomeMessage()
+  applyTopicLocks()
+});
+
 document.querySelectorAll(".challenge").forEach((button) => {
   button.addEventListener("click", (e) => {
     const topic = e.target.getAttribute("data-topic");
@@ -5,6 +12,7 @@ document.querySelectorAll(".challenge").forEach((button) => {
     window.location.href = "../challenge/index.html";
   });
 });
+
 
 document.getElementById("logout").addEventListener("click", (e) => {
   window.location.href = "../login/index.html";
@@ -18,10 +26,16 @@ document.querySelectorAll(".practice").forEach((button) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
-  setTheme(savedTheme);
-});
+function displayWelcomeMessage(){
+  const welcomeMessage = document.getElementById("welcome-message")
+  const username = localStorage.getItem("username")
+
+  if(username){
+    welcomeMessage.textContent = `Welcome to Eureka, ${username}!`
+  } else {
+    welcomeMessage.textContent = "Welcome to Eureka!"
+  }
+}
 
 function setTheme(themeName) {
   document.documentElement.setAttribute("data-theme", themeName);
@@ -31,7 +45,6 @@ function setTheme(themeName) {
 
 const unlockedTopics = ["ancient_egypt", "ancient_greece"]
 
-document.addEventListener("DOMContentLoaded", applyTopicLocks);
 
 function applyTopicLocks() {
   const topics = document.querySelectorAll(".topic");
