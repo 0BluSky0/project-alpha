@@ -201,7 +201,7 @@ body {
   animation: incorrectShake 0.5s;
 }
 
-.input-answer{
+/* .input-answer{
   margin-top:15px
 }
 
@@ -212,7 +212,7 @@ body {
   border-radius:5px;
   font-size:15px;
   
-}
+} */
 
 .answer-input{
   margin-top:15px
