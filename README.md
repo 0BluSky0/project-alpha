@@ -34,6 +34,30 @@ Eureka! was created to respond to these challenges by offering an interactive an
     - You can also deploy the frontend, e.g. using Netlify 
 
 
+## Process
+The frontend for Eureka! was developed through an iterative design and implementation process with a strong focus on usability, accessibility and student engagement.
+
+We began by analysing the project brief and stakeholder needs to understand the main problem the application needed to solve. From this, we identified that the frontend had to feel more engaging and rewarding than traditional classroom quiz tools while still remainin simple and easy to use for students in a school environment.
+
+After the initial planning stage, we produced wireframes to map out the structure and user journey of the application. These early designs helped us define the core pages of the platform including signup, login, homepage, quiz, leaderboard and profile views. The wireframes also guided layout decisions, visual hierarchy and how students would move through the platform from one stage to the next.
+
+Once the user flow had been agreed, the frontend was built page by page using HTML, CSS and JavaScript. We focused on creating a clear and consistent interface across the application so that users could move between screens easily. Styling choices were made to support a game like but still school appropriate feel, using bright visuals, simple navigation and subject based imagery to increase engagement.
+
+Throughout development, the frontend was refined collaboratively alongside backend integration. As more backend functionality became available, pages were updated to fetch and display live data such as quiz questions, leaderboard results and user progress. This meant that some frontend work was completed in stages, beginning with structure and layout, then moving into interactivity, validation and database connected features.
+
+The team used an agile workflow supported by Trello to organise tasks, track progress and divide responsibility across features. This helped us to manage the project efficiently within a one week sprint and allowed frontend work to progress in parallel with backend and database development.
+
+Overall, the frontend process combined planning, wireframing, implementation, testing, debugging and collaborative iteration to create a functional educational interface that supports both learning and engagement.
+
+
+## Bugs
+There are no major unresolved bugs that prevent the frontend from working at MVP level, but there are a few limitations and minor issues:
+- ⁠Content on some pages rely on backend/database data, so content may not appear unless the database is populated correctly.
+- Certain progress-related displays were adjusted to fit the available stored data during development. 
+- Error messages and their handling might be further refined for future versions.
+
+
+
 ## Style Guide
 ### Design Principles
 - Target Audience - KS3 pupils, especially focusing on Year 7
