@@ -202,6 +202,23 @@ describe('User', () => {
 
         })
 
+        it('should use default limit of 10 when no limit is provided', async () => {
+
+            //Arrange
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockUser] })
+
+            //Act
+            const result = await User.getTopByXP()
+
+            //Assert
+            expect(result).toHaveLength(1)
+            expect(db.query).toHaveBeenCalledWith(
+                "SELECT id, username, total_xp, level FROM users ORDER BY total_xp DESC LIMIT $1;",
+                [10]
+            )
+
+        })
+
     })
 
 

@@ -97,6 +97,23 @@ describe('GameSession', () => {
 
         })
 
+        it('should use default limit of 10 when no limit is provided', async () => {
+
+            //Arrange
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockGameSession] })
+
+            //Act
+            const result = await GameSession.getByUser(1)
+
+            //Assert
+            expect(result).toHaveLength(1)
+            expect(db.query).toHaveBeenCalledWith(
+                'SELECT * FROM game_sessions WHERE user_id = $1 ORDER BY id DESC LIMIT $2;',
+                [1, 10]
+            )
+
+        })
+
         // it('should throw an error if the database fails', async () => {
 
         //     //Arrange

@@ -117,6 +117,26 @@ describe ('authController', () => {
 
         })
 
+        it('should return 400 if token generation fails', async () => {
+
+            //Arrange
+            const mockReq = { body: { email: 'test@email.com', password: 'test-password' } }
+            const mockUser = { id: 1, email: 'test@email.com', password_hash: 'fake-hashed-password', role: 'student' }
+            jest.spyOn(User, 'findByEmail').mockResolvedValueOnce(mockUser)
+            jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true)
+            jest.spyOn(jwt, 'sign').mockImplementation((payload, secret, options, callback) => {
+                callback(new Error('Error in token generation'))
+            })
+
+            //Act
+            await authController.login(mockReq, mockRes)
+
+            //Assert
+            expect(mockStatus).toHaveBeenCalledWith(400)
+            expect(mockJson).toHaveBeenCalledWith({ error: 'Error in token generation' })
+
+        })
+
     })
 
 
