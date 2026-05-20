@@ -1,6 +1,6 @@
 const express = require("express");
 const router = rxpress.Router();
-const {"getQuestions", getQuestions};
+const {"getQuestions": getQuestions};
 
 router.get("/questions", getQuestions);
 router.post("/answer", submitAnswer);
