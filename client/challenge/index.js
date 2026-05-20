@@ -212,6 +212,7 @@ async function submitQuiz() {
 
 
   let score = 0;
+  const totalQuestions = allQuestions.length
   const results = allQuestions.forEach((question, index) => {
     const userAnswer = userAnswers[index];
     let isCorrect = false;
@@ -256,7 +257,7 @@ async function submitQuiz() {
 
     const data = await response.json();
     if (response.ok) {
-      alert(`Quiz submitted! You scored ${data.score}/${data.total} points`);
+      alert(`Quiz submitted! You scored ${data.score}/${totalQuestions} points`);
       window.location.href = "../homepage/index.html";
     } else {
       alert(`Failed to submit quiz: ${data.error || 'Unknown error'}`);
