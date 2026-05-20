@@ -18,8 +18,6 @@ async function register(req, res) {
 
 async function login(req, res) {
     const data = req.body;
-    console.log("Login request received:", req.body)
-
     try {
         const user = await User.findByEmail(data.email);
 
@@ -29,8 +27,7 @@ async function login(req, res) {
             const payload = { id: user.id, role: user.role };
             const sendToken = (err, token) => {
                 if (err) { throw new Error('Error in token generation'); }
-                console.error("JWT error:", err);
-                res.status(200).json({ success: true, username: user.username, token: token });
+                res.status(200).json({ success: true, token: token });
             }
             jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, sendToken);
         } else {
