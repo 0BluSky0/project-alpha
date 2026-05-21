@@ -1,4 +1,4 @@
-const { renderDOM } = require("./helpers");
+const { renderDOM } = require("../../helpers");
 
 let dom;
 let document;
@@ -95,34 +95,37 @@ describe("homepage/index.html", () => {
     expect(logoutButton).toBeTruthy();
   });
 
-  it("displays a streak",()=> {
-    const streak = document.querySelector("#streak")
-    expect(streak).toBeTruthy()
-  })
-
-  it("displays locked topics grayed out and disabled", () => {
-  const lockedTopic = document.querySelector("#topic-3");
-  expect(lockedTopic).toBeTruthy();
-
-  const iconContainer = lockedTopic.querySelector(".icon-container");
-  expect(iconContainer.style.filter).toBe("grayscale(100%)");
-  expect(iconContainer.style.opacity).toBe("0.5");
-
-  const buttons = lockedTopic.querySelectorAll("button");
-  buttons.forEach((button) => {
-    expect(button.disabled).toBe(true);
-    expect(button.style.opacity).toBe("0.5");
-    expect(button.style.cursor).toBe("not-allowed");
+  it("displays a streak", () => {
+    const streak = document.querySelector("#streak");
+    expect(streak).toBeTruthy();
   });
-});
 
-it("displays unlocked topics as active", () => {
-  const unlockedTopic = document.querySelector("#topic-1");
-  expect(unlockedTopic).toBeTruthy();
+  it("displays locked topics as disabled", () => {
+    dom.window.applyTopicLocks()
+    const lockedTopic = document.querySelector("#topic-3");
+    expect(lockedTopic).toBeTruthy();
 
-  const buttons = unlockedTopic.querySelectorAll("button");
-  buttons.forEach((button) => {
-    expect(button.disabled).toBe(false);
+    const iconContainer = lockedTopic.querySelector(".icon-container");
+    expect(iconContainer).toBeTruthy();
+
+    expect(iconContainer.style.filter).toBe("grayscale(100%)");
+    expect(iconContainer.style.opacity).toBe("0.5");
+
+    const buttons = document.querySelectorAll("#topic-3 button");
+    buttons.forEach((button) => {
+      expect(button.disabled).toBe(true);
+      expect(button.style.opacity).toBe("0.5");
+      expect(button.style.cursor).toBe("not-allowed");
+    });
   });
-});
+
+  it("displays unlocked topics as active", () => {
+    const unlockedTopic = document.querySelector("#topic-1");
+    expect(unlockedTopic).toBeTruthy();
+
+    const buttons = unlockedTopic.querySelectorAll("button");
+    buttons.forEach((button) => {
+      expect(button.disabled).toBe(false);
+    });
+  });
 });

@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "testHomepage": "jest /__tests__/homepage/test.js",
     "testSignup": "jest /__tests__/signup/test.js",
     "testChallenge": "jest /__tests__/challenge/test.js",
+    "testLeaderboard": "jest /__tests__/leaderboard/test.js",
     "coverage": "jest --coverage"
   },
   "keywords": [],
