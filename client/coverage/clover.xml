@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1779372771759" clover="3.2.0">
+  <project timestamp="1779372771760" name="All files">
+    <metrics statements="17" coveredstatements="17" conditionals="5" coveredconditionals="2" methods="3" coveredmethods="3" elements="25" coveredelements="22" complexity="0" loc="17" ncloc="17" packages="1" files="1" classes="1"/>
+    <file name="helpers.js" path="C:\Users\Eleanor Simmons\OneDrive\la-fosse\week-5-project\project-alpha\client\__tests__\homepage\helpers.js">
+      <metrics statements="17" coveredstatements="17" conditionals="5" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="1" type="cond" truecount="0" falsecount="1"/>
+      <line num="7" count="5" type="stmt"/>
+      <line num="8" count="5" type="stmt"/>
+      <line num="11" count="5" type="stmt"/>
+      <line num="18" count="5" type="cond" truecount="1" falsecount="1"/>
+      <line num="19" count="5" type="stmt"/>
+      <line num="23" count="5" type="cond" truecount="1" falsecount="1"/>
+      <line num="24" count="5" type="stmt"/>
+      <line num="25" count="5" type="stmt"/>
+      <line num="26" count="5" type="stmt"/>
+      <line num="29" count="5" type="stmt"/>
+      <line num="30" count="5" type="stmt"/>
+      <line num="31" count="5" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

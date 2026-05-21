@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test1": "jest /__tests__/homepage/test.js",
+    "testHomepage": "jest /__tests__/homepage/test.js",
+    "testSignup": "jest /__tests__/signup/test.js",
     "coverage": "jest --coverage"
   },
   "keywords": [],
