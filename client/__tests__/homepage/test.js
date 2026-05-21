@@ -70,17 +70,59 @@ describe("homepage/index.html", () => {
     expect(challengeButton.textContent).toContain("Challenge");
   });
 
-  it("displays a navbar with profile and leaderboard", () => {
+  it("displays a navbar with profile and leaderboard written", () => {
     const navbar = document.querySelector("#navbar");
     expect(navbar).toBeTruthy();
     expect(navbar.innerHTML).toContain("Profile");
     expect(navbar.innerHTML).toContain("Leaderboard");
   });
 
-it("has a logout button",() => {
-    const logoutBtn = document.querySelector("logout");
+  it("navbar has profile and leaderboard links", () => {
+    const navbar = document.querySelector("#navbar");
+    expect(navbar).toBeTruthy();
+
+    const profileLink = document.querySelector("#navbar a[href*='#']");
+    expect(profileLink).toBeTruthy();
+
+    const leaderboardLink = document.querySelector(
+      "#navbar a[href*='leaderboard']",
+    );
+    expect(leaderboardLink).toBeTruthy();
+  });
+
+  it("has a logout button", () => {
+    const logoutButton = document.querySelector("#logout");
     expect(logoutButton).toBeTruthy();
-})
+  });
 
+  it("displays a streak",()=> {
+    const streak = document.querySelector("#streak")
+    expect(streak).toBeTruthy()
+  })
 
+  it("displays locked topics grayed out and disabled", () => {
+  const lockedTopic = document.querySelector("#topic-3");
+  expect(lockedTopic).toBeTruthy();
+
+  const iconContainer = lockedTopic.querySelector(".icon-container");
+  expect(iconContainer.style.filter).toBe("grayscale(100%)");
+  expect(iconContainer.style.opacity).toBe("0.5");
+
+  const buttons = lockedTopic.querySelectorAll("button");
+  buttons.forEach((button) => {
+    expect(button.disabled).toBe(true);
+    expect(button.style.opacity).toBe("0.5");
+    expect(button.style.cursor).toBe("not-allowed");
+  });
+});
+
+it("displays unlocked topics as active", () => {
+  const unlockedTopic = document.querySelector("#topic-1");
+  expect(unlockedTopic).toBeTruthy();
+
+  const buttons = unlockedTopic.querySelectorAll("button");
+  buttons.forEach((button) => {
+    expect(button.disabled).toBe(false);
+  });
+});
 });
