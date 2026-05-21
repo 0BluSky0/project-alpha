@@ -1,6 +1,6 @@
 const request = require('supertest');
-const app = require('../../../app');
-const { resetTestDB } = require('../_config');
+const app = require('../../app');
+const { resetTestDB } = require('../unit/_config');
 
 describe('Score Endpoints', () => {
     let api;

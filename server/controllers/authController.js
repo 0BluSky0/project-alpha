@@ -10,7 +10,8 @@ async function register(req, res) {
         const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
         data["password_hash"] = await bcrypt.hash(data.password, salt);
         const user = await User.create(data.username, data.email, data["password_hash"]);
-        res.status(201).json(user);
+        const { password_hash, ...safeUser } = user;
+        res.status(201).json(safeUser);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
@@ -18,8 +19,6 @@ async function register(req, res) {
 
 async function login(req, res) {
     const data = req.body;
-    console.log("Login request received:", req.body)
-
     try {
         const user = await User.findByEmail(data.email);
 
@@ -29,8 +28,7 @@ async function login(req, res) {
             const payload = { id: user.id, role: user.role };
             const sendToken = (err, token) => {
                 if (err) { throw new Error('Error in token generation'); }
-                console.error("JWT error:", err);
-                res.status(200).json({ success: true, username: user.username, token: token });
+                res.status(200).json({ success: true, token: token });
             }
             jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, sendToken);
         } else {

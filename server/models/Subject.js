@@ -19,7 +19,7 @@ class Subject {
   static async findById(id) {
     const response = await db.query('SELECT * FROM subjects WHERE id = $1;', [id]);
 
-    if (response.rows.length != 1) {
+    if (response.rows.length !== 1) {
       throw new Error('Unable to locate subject.');
     }
 
