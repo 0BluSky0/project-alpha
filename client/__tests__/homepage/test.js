@@ -18,7 +18,7 @@ describe("homepage/index.html", () => {
     global.localStorage = localStorageMock;
     dom = await renderDOM("homepage/index.html", "homepage/index.js");
     document = await dom.window.document;
-    dom.window.localStorage = localStorageMock;
+    dom.window.localStorage = localStorageMock
 });
   
   afterEach(() => {
@@ -28,6 +28,7 @@ describe("homepage/index.html", () => {
 
 	it("displays default welcome message if no username is saved", () => {
         localStorageMock.removeItem("username")
+        dom.window.displayWelcomeMessage()
 	    const welcomeMessage = document.getElementById("welcome-message")
         expect(welcomeMessage).toBeTruthy()
         expect(welcomeMessage.textContent).toBe("Welcome to Eureka!")
@@ -35,6 +36,7 @@ describe("homepage/index.html", () => {
   
 	it("includes username in welcome message if user is logged in", () => {
 	    localStorageMock.setItem("username", "Ella")
+        dom.window.localStorage = localStorageMock
         dom.window.displayWelcomeMessage()
         const welcomeMessage = document.getElementById("welcome-message")
         expect(welcomeMessage).toBeTruthy()
@@ -48,7 +50,6 @@ describe("homepage/index.html", () => {
 	});
 
     it("applies the user's saved theme to the page", () => {
-    dom.window.localStorage = localStorageMock
     localStorageMock.setItem("theme", "dark")
     const htmlElement = document.documentElement
     dom.window.setTheme("dark")

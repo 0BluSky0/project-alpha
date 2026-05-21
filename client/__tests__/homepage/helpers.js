@@ -11,7 +11,13 @@ const renderDOM = async (htmlFile, jsFile = null) => {
   const dom = new JSDOM(html, {
     runScripts: "dangerously",
     resources: "usable",
+    pretendToBeVisual: true,
+    url: "http://localhost"
   });
+
+  if (global.localStorage){
+    dom.window.localStorage = global.localStorage
+  }
 
   // read js file
   if (jsFile) {
