@@ -7,7 +7,7 @@
 
 The project was developed in response to a brief focused on the declining interest in non-STEM subjects across secondary schools. Our solution aims to make learning more enjoyable, accessible and motivating by combining subject-based quiz gameplay with progress tracking, XP and a competitive leaderboard.
 
-Eureka! is designed to support students in revisiting content in a fun and low-pressure way, while also giving teachers a clearer view of student performance.
+**Eureka!** is designed to support students in revisiting content in a fun and low-pressure way, while also giving teachers a clearer view of student performance.
 
 
 ## Problem Statement
@@ -15,7 +15,7 @@ The management team of the Hive group of secondary schools identified a drop in 
 
 Students reported that some subjects felt repetitive, content-heavy and difficult to retain. Teachers highlighted that students often disengage when learning relies too heavily on textbook work or repeated classroom activities. Parents expressed concerns about low enjoyment and lack of motivation, while stakeholders also wanted a solution that could be used easily on school devices such as tablets.
 
-Eureka! was created to respond to these challenges by offering an interactive and engaging learning experience for KS3 students to develop their passion and skills in non-STEM subjects.
+**Eureka!** was created to respond to these challenges by offering an interactive and engaging learning experience for KS3 students to develop their passion and skills in non-STEM subjects.
 
 
 ## Installation & Usage
@@ -35,7 +35,7 @@ Eureka! was created to respond to these challenges by offering an interactive an
 
 
 ## Process
-The frontend for Eureka! was developed through an iterative design and implementation process with a strong focus on usability, accessibility and student engagement.
+The frontend for **Eureka!** was developed through an iterative design and implementation process with a strong focus on usability, accessibility and student engagement.
 
 We began by analysing the project brief and stakeholder needs to understand the main problem the application needed to solve. From this, we identified that the frontend had to feel more engaging and rewarding than traditional classroom quiz tools while still remaining simple and easy to use for students in a school environment.
 
