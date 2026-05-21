@@ -33,9 +33,7 @@ function displayWelcomeMessage(){
 function setTheme(themeName) {
   document.documentElement.setAttribute("data-theme", themeName);
   console.log("Setting theme to:", themeName);
-  localStorage.setItem("theme", themeName);
 }
-
 const unlockedTopics = ["ancient_egypt", "ancient_greece"]
 
 
@@ -63,3 +61,5 @@ function applyTopicLocks() {
     }
   });
 }
+
+window.setTheme = setTheme;

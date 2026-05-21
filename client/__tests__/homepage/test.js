@@ -14,11 +14,12 @@ const localStorageMock = (() => {
 })();
 
 describe("homepage/index.html", () => {
-  beforeEach(async () => {
-    global.localStorage = localStorageMock
+ beforeEach(async () => {
+    global.localStorage = localStorageMock;
     dom = await renderDOM("homepage/index.html", "homepage/index.js");
     document = await dom.window.document;
-  });
+    dom.window.localStorage = localStorageMock;
+});
   
   afterEach(() => {
     jest.clearAllMocks();
@@ -27,15 +28,15 @@ describe("homepage/index.html", () => {
 
 	it("displays default welcome message if no username is saved", () => {
         localStorageMock.removeItem("username")
-	    const welcomeMessage = document.getElementbyId("welcome-message")
-        expect(welcomeMessage).toBeTruthy
+	    const welcomeMessage = document.getElementById("welcome-message")
+        expect(welcomeMessage).toBeTruthy()
         expect(welcomeMessage.textContent).toBe("Welcome to Eureka!")
     });
   
 	it("includes username in welcome message if user is logged in", () => {
 	    localStorageMock.setItem("username", "Ella")
         dom.window.displayWelcomeMessage()
-        const welcomeMessage = document.getElementbyId("welcome-message")
+        const welcomeMessage = document.getElementById("welcome-message")
         expect(welcomeMessage).toBeTruthy()
         expect(welcomeMessage.textContent).toBe("Welcome to Eureka, Ella!")
 	});
@@ -47,11 +48,12 @@ describe("homepage/index.html", () => {
 	});
 
     it("applies the user's saved theme to the page", () => {
-	    localStorageMock.setItem("theme", "dark")
-        const htmlElement = document.documentElement
-        dom.window.setTheme("dark")
-        expect(htmlElement.getAttribute("data-theme")).toBe("dark")
-	});
+    dom.window.localStorage = localStorageMock
+    localStorageMock.setItem("theme", "dark")
+    const htmlElement = document.documentElement
+    dom.window.setTheme("dark")
+    expect(htmlElement.getAttribute("data-theme")).toBe("dark")
+});
 
     it("has a button to navigate to the challenge page", () => {
 	    const challengeButton = document.querySelector(".challenge")
