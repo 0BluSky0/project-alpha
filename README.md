@@ -15,7 +15,7 @@ The management team of the Hive group of secondary schools identified a drop in 
 
 Students reported that some subjects felt repetitive, content-heavy and difficult to retain. Teachers highlighted that students often disengage when learning relies too heavily on textbook work or repeated classroom activities. Parents expressed concerns about low enjoyment and lack of motivation, while stakeholders also wanted a solution that could be used easily on school devices such as tablets.
 
-Eureka! was created to respond to these challenges by offering an interactive and 
+Eureka! was created to respond to these challenges by offering an interactive and engaging learning experience for KS3 students to develop their passion and skills in non-STEM subjects.
 
 
 ## Installation & Usage
@@ -111,5 +111,6 @@ Here's what's coming next to **Eureka!**
 - **Practice Mode** - Try questions without saving scores
 - **Scores Page** - Review past challenge attempts
 - **Customisation** - More themes, avatars, and profile options
-- **Teacher Dashboard** - Add questions, track student progress
+- **Teacher Portal** - Add questions, track student progress
 - **Multiplayer Quizzes** - Compete in real time with classmates
+- **Parent Progress View** - See how your child's learning is progressing
