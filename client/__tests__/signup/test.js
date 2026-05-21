@@ -22,4 +22,14 @@ describe("signup/index.html", () => {
     expect(username).toBeTruthy()
     expect(username.type).toBe("text")
   })
+  it("has a password input field",()=>{
+    const password = document.querySelector("#password")
+    expect(password).toBeTruthy()
+    expect(password.type).toBe("password")
+  })
+  it("has an email input field",()=>{
+    const email = document.querySelector("#email")
+    expect(email).toBeTruthy()
+    expect(email.type).toBe("text")
+  })
 })
