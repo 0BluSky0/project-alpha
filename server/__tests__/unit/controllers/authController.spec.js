@@ -117,6 +117,63 @@ describe ('authController', () => {
 
         })
 
-    })    
+        it('should return 400 if token generation fails', async () => {
+
+            //Arrange
+            const mockReq = { body: { email: 'test@email.com', password: 'test-password' } }
+            const mockUser = { id: 1, email: 'test@email.com', password_hash: 'fake-hashed-password', role: 'student' }
+            jest.spyOn(User, 'findByEmail').mockResolvedValueOnce(mockUser)
+            jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true)
+            jest.spyOn(jwt, 'sign').mockImplementation((payload, secret, options, callback) => {
+                callback(new Error('Error in token generation'))
+            })
+
+            //Act
+            await authController.login(mockReq, mockRes)
+
+            //Assert
+            expect(mockStatus).toHaveBeenCalledWith(400)
+            expect(mockJson).toHaveBeenCalledWith({ error: 'Error in token generation' })
+
+        })
+
+    })
+
+
+    describe('updateColourScheme', () => {
+
+        it('should update colour scheme and return 200', async () => {
+
+            //Arrange
+            const mockReq = { body: { colourScheme: 'dark' }, user: { id: 1 } }
+            const mockUser = { id: 1, username: 'test-user', colour_scheme: 'dark' }
+            jest.spyOn(User, 'updateColourScheme').mockResolvedValueOnce(mockUser)
+
+            //Act
+            await authController.updateColourScheme(mockReq, mockRes)
+
+            //Assert
+            expect(User.updateColourScheme).toHaveBeenCalledWith(1, 'dark')
+            expect(mockStatus).toHaveBeenCalledWith(200)
+            expect(mockJson).toHaveBeenCalledWith(mockUser)
+
+        })
+
+        it('should return 400 if update fails', async () => {
+
+            //Arrange
+            const mockReq = { body: { colourScheme: 'dark' }, user: { id: 1 } }
+            jest.spyOn(User, 'updateColourScheme').mockRejectedValueOnce(new Error('Unable to update colour scheme.'))
+
+            //Act
+            await authController.updateColourScheme(mockReq, mockRes)
+
+            //Assert
+            expect(mockStatus).toHaveBeenCalledWith(400)
+            expect(mockJson).toHaveBeenCalledWith({ error: 'Unable to update colour scheme.' })
+
+        })
+
+    })
 
 })

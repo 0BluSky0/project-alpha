@@ -74,6 +74,25 @@ describe('gameController', () => {
 
         })
 
+        it('should return 404 if options cannot be fetched for a question', async () => {
+
+            //Arrange
+            const mockReq = { params: { subjectId: '1' } }
+            const mockQuestions = [
+                { id: 1, subject_id: 1, question_text: 'What year did WW2 end?', question_type: 'multiple_choice' }
+            ]
+            jest.spyOn(Question, 'getBySubject').mockResolvedValueOnce(mockQuestions)
+            jest.spyOn(Option, 'getByQuestion').mockRejectedValueOnce(new Error('No options available for this question.'))
+
+            //Act
+            await gameController.getQuestions(mockReq, mockRes)
+
+            //Assert
+            expect(mockStatus).toHaveBeenCalledWith(404)
+            expect(mockJson).toHaveBeenCalledWith({ error: 'No options available for this question.' })
+
+        })
+
     })
 
 
