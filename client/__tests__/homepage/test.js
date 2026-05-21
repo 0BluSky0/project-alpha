@@ -1,0 +1,85 @@
+const { renderDOM } = require("./helpers");
+
+let dom;
+let document;
+
+const localStorageMock = (() => {
+  let store = {};
+  return {
+    getItem: (key) => store[key] || null,
+    setItem: (key, value) => { store[key] = value.toString(); },
+    removeItem: (key) => { delete store[key]; },
+    clear: () => { store = {}; },
+  };
+})();
+
+describe("homepage/index.html", () => {
+  beforeEach(async () => {
+    global.localStorage = localStorageMock
+    dom = await renderDOM("homepage/index.html", "homepage/index.js");
+    document = await dom.window.document;
+  });
+  
+  afterEach(() => {
+    jest.clearAllMocks();
+    localStorageMock.clear();
+  });
+
+	it("displays default welcome message if no username is saved", () => {
+        localStorageMock.removeItem("username")
+	    const welcomeMessage = document.getElementbyId("welcome-message")
+        expect(welcomeMessage).toBeTruthy
+        expect(welcomeMessage.textContent).toBe("Welcome to Eureka!")
+    });
+  
+	it("includes username in welcome message if user is logged in", () => {
+	    localStorageMock.setItem("username", "Ella")
+        dom.window.displayWelcomeMessage()
+        const welcomeMessage = document.getElementbyId("welcome-message")
+        expect(welcomeMessage).toBeTruthy()
+        expect(welcomeMessage.textContent).toBe("Welcome to Eureka, Ella!")
+	});
+
+    it("applies default theme if no theme is saved", () => {
+	    localStorageMock.removeItem("theme")
+        const htmlElement = document.documentElement
+        expect(htmlElement.getAttribute("data-theme")).toBe("light")
+	});
+
+    it("applies the user's saved theme to the page", () => {
+	    localStorageMock.setItem("theme", "dark")
+        const htmlElement = document.documentElement
+        expect(htmlElement.getAttribute("data-theme")).toBe("dark")
+	});
+
+    it("has a button to navigate to the challenge page", () => {
+	    const challengeButton = document.querySelectorAll(".challenge")
+        expect(challengeButton).toBeTruthy()
+        expect(challengeButton.textContent).toContain("Challenge")
+	});
+
+    // it("displays unlocked topics in colour", () => {
+	    
+	// });
+
+    // it("displays locked topics greyed out", () => {
+	    
+	// });
+
+    // it("if topic is unlocked, challenge button takes user to challenge page", () => {
+	    
+	// });
+
+    // it("if topic is locked, challenge button is inactive", () => {
+	    
+	// });
+
+    // it("displays a navbar with profile and leaderboard", () => {
+	    
+	// })
+
+    // it("clicking leaderboard takes user to leaderboard page", () => {
+	    
+	// })
+
+	});
