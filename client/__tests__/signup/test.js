@@ -30,6 +30,48 @@ describe("signup/index.html", () => {
   it("has an email input field",()=>{
     const email = document.querySelector("#email")
     expect(email).toBeTruthy()
-    expect(email.type).toBe("text")
+    expect(email.type).toBe("email")
+  })
+  it("shows the login button", ()=>{
+    const loginButton = document.querySelector("#login-btn")
+    expect(loginButton).toBeTruthy()
+    expect(loginButton.textContent).toBe("Log in")
+  })
+  it("displays theme options", ()=>{
+    const options = document.querySelector(".colour-options")
+    const theme = document.querySelector(".colour-options button")
+    expect(options).toBeTruthy()
+    expect(theme).toBeTruthy()
+  })
+  
+  it("displays light button",()=>{
+    const light = document.querySelector("#light-btn")
+    expect(light).toBeTruthy()
+    expect(light.textContent).toBe("Light")
+  })
+  it("displays dark button",()=>{
+    const dark = document.querySelector("#dark-btn")
+    expect(dark).toBeTruthy()
+    expect(dark.textContent).toBe("Dark")
+  })
+  it("displays ocean button",()=>{
+    const ocean = document.querySelector("#ocean-btn")
+    expect(ocean).toBeTruthy()
+    expect(ocean.textContent).toBe("Ocean")
+  })
+  it("displays forest button",()=>{
+    const forest = document.querySelector("#forest-btn")
+    expect(forest).toBeTruthy()
+    expect(forest.textContent).toBe("Forest")
+  })
+  it("displays sunset button",()=>{
+    const sunset = document.querySelector("#sunset-btn")
+    expect(sunset).toBeTruthy()
+    expect(sunset.textContent).toBe("Sunset")
+  })
+  it("displays finish button",()=>{
+    const finish = document.querySelector("#finish-btn")
+    expect(finish).toBeTruthy()
+    expect(finish.textContent).toBe("Finish!")
   })
 })
