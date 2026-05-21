@@ -201,31 +201,21 @@ body {
   animation: incorrectShake 0.5s;
 }
 
-/* .input-answer{
-  margin-top:15px
+.text-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
 }
 
-.input-answer input{
-  width:95%;
-  padding:10px;
-  border: 1px solid var(--primary);
-  border-radius:5px;
-  font-size:15px;
-  
-} */
-
-.answer-input{
-  margin-top:15px
+.input-container {
+  width: 100%;
+  margin: 10px 0;
 }
 
-.answer-input input{
-  width:95%;
-  padding:10px;
-  border: 1px solid var(--primary);
-  border-radius:5px;
-  font-size:15px;
-  
-}
 
 #navigation-buttons {
   display: flex;
@@ -235,7 +225,7 @@ body {
 
 .nav-btn {
   padding: 10px 20px;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   color: white;
   border: none;
   border-radius: 5px;

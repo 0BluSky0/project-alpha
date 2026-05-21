@@ -86,12 +86,14 @@ function displayCurrentQuestion() {
   const container = document.getElementById("current-question-container");
   const question = allQuestions[currentQuestionIndex];
 
+  console.log("current question:", question)
+
   if (!question) {
     container.innerHTML = "<p>No questions available</p>";
     return;
   }
 
-  // Fade out animation (for transition between questions)
+  // Fade out animation
   container.style.opacity = 0;
 
   let questionHTML = `
@@ -116,8 +118,8 @@ function displayCurrentQuestion() {
     `;
   } else if (question.question_type === "input") {
     questionHTML += `
-      <div class="answer-input">
-        <input type="text" class="answer-input" placeholder="Your answer...">
+      <div class="input-container">
+        <input type="text" class="text-input" placeholder="Your answer...">
       </div>
     `;
   }
@@ -184,13 +186,15 @@ function displayCurrentQuestion() {
 
  
   if (question.question_type === "input") {
-    const inputField = questionDiv.querySelector('.answer-input');
-    if (inputField) {
-      inputField.addEventListener('input', (e) => {
+  const inputContainer = questionDiv.querySelector('.input-container');
+  if (inputContainer) {
+    inputContainer.addEventListener('input', (e) => {
+      if (e.target.classList.contains('text-input')) {
         userAnswers[currentQuestionIndex] = e.target.value.trim();
-      });
-    }
+      }
+    })
   }
+}
 
   updateNavigationButtons();
 }
@@ -240,7 +244,7 @@ async function submitQuiz() {
 
   let score = 0;
   const totalQuestions = allQuestions.length
-  const results = allQuestions.forEach((question, index) => {
+  allQuestions.forEach((question, index) => {
     const userAnswer = userAnswers[index];
     let isCorrect = false;
  if (question.question_type === "multiple_choice" || question.question_type === "true_false") {
