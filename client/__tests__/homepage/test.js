@@ -54,7 +54,7 @@ describe("homepage/index.html", () => {
 	});
 
     it("has a button to navigate to the challenge page", () => {
-	    const challengeButton = document.querySelectorAll(".challenge")
+	    const challengeButton = document.querySelector(".challenge")
         expect(challengeButton).toBeTruthy()
         expect(challengeButton.textContent).toContain("Challenge")
 	});
