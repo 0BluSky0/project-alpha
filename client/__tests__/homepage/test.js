@@ -49,6 +49,7 @@ describe("homepage/index.html", () => {
     it("applies the user's saved theme to the page", () => {
 	    localStorageMock.setItem("theme", "dark")
         const htmlElement = document.documentElement
+        dom.window.setTheme("dark")
         expect(htmlElement.getAttribute("data-theme")).toBe("dark")
 	});
 

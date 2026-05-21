@@ -16,7 +16,7 @@
     "canvas-confetti": "^1.9.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0",
-    "jest-environment-jsdom": "^30.4.1",
+    "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^19.0.0",
     "util": "^0.12.5"
   }

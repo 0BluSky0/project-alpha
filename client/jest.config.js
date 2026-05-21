@@ -5,7 +5,8 @@ module.exports = {
     "./__tests__/homepage/helpers.js",
     "./__tests__/challenge/helpers.js",
     "./__tests__/signup/helpers.js",
-    "./__tests__/login/helpers.js"
+    "./__tests__/login/helpers.js",
+    "./__tests__/leaderboard/helpers.js"
   ],
   transformIgnorePatterns: [
     "node_modules/(?!(jsdom|canvas-confetti)/)" 
