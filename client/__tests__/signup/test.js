@@ -1,3 +1,5 @@
+require("../../signup/index")
+
 const { renderDOM } = require("../../helpers");
 
 let dom;
