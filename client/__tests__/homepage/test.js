@@ -35,19 +35,19 @@ describe("homepage/index.html", () => {
     });
   
 	it("includes username in welcome message if user is logged in", () => {
-	    localStorageMock.setItem("username", "Ella")
-        dom.window.localStorage = localStorageMock
-        dom.window.displayWelcomeMessage()
-        const welcomeMessage = document.getElementById("welcome-message")
-        expect(welcomeMessage).toBeTruthy()
-        expect(welcomeMessage.textContent).toBe("Welcome to Eureka, Ella!")
-	});
-
+    dom.window.localStorage = localStorageMock
+    localStorageMock.setItem("username", "Ella")
+    dom.window.displayWelcomeMessage()
+    const welcomeMessage = document.getElementById("welcome-message")
+    expect(welcomeMessage).toBeTruthy()
+    expect(welcomeMessage.textContent).toBe("Welcome to Eureka, Ella!")
+});
     it("applies default theme if no theme is saved", () => {
-	    localStorageMock.removeItem("theme")
-        const htmlElement = document.documentElement
-        expect(htmlElement.getAttribute("data-theme")).toBe("light")
-	});
+    localStorageMock.removeItem("theme")
+    const htmlElement = document.documentElement
+    console.log("data-theme value:", htmlElement.getAttribute("data-theme"))
+    expect(htmlElement.getAttribute("data-theme")).toBe("light")
+});
 
     it("applies the user's saved theme to the page", () => {
     localStorageMock.setItem("theme", "dark")

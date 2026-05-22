@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs").promises;
 const { JSDOM } = require("jsdom");
 
+
 const renderDOM = async (htmlFile, jsFile = null) => {
   
   const htmlPath = path.join(__dirname, "../.." ,htmlFile);

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("theme") || "light";
+  const savedTheme = window.localStorage.getItem("theme") || "light";
   setTheme(savedTheme);
   displayWelcomeMessage()
   applyTopicLocks()
@@ -63,3 +63,4 @@ function applyTopicLocks() {
 }
 
 window.setTheme = setTheme;
+window.displayWelcomeMessage = displayWelcomeMessage;
