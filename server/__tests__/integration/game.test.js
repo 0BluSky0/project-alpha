@@ -36,25 +36,35 @@ describe('Game Endpoints', () => {
     describe('GET /game/questions/:subjectId', () => {
 
         it('should return questions for a valid subject', async () => {
-            
+
             const subjectId = 1;
-            
+
             const response = await request(api)
-                .get(`/game/questions/${subjectId}`);
-            
+                .get(`/game/questions/${subjectId}`)
+                .set('Authorization', `Bearer ${token}`);
+
             expect(response.status).toBe(200);
             expect(response.body).toBeInstanceOf(Array);
             expect(response.body.length).toBeGreaterThan(0);
         });
 
         it('should return 404 for an invalid subject', async () => {
-            
+
             const subjectId = 999;
-            
+
             const response = await request(api)
-                .get(`/game/questions/${subjectId}`);
-            
+                .get(`/game/questions/${subjectId}`)
+                .set('Authorization', `Bearer ${token}`);
+
             expect(response.status).toBe(404);
+        });
+
+        it('should return 403 if no token provided', async () => {
+
+            const response = await request(api)
+                .get('/game/questions/1');
+
+            expect(response.status).toBe(403);
         });
 
     });

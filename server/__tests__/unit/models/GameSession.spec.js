@@ -83,29 +83,36 @@ describe('GameSession', () => {
 
         })
 
-        it('should throw an error if no sessions are found for the user', async () => {
+        it('should return an empty array if no sessions are found for the user', async () => {
 
             //Arrange
             const sessionData = { userId: 1, limit: 10 }
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [] })
 
-            //Act & Assert
-            await expect(GameSession.getByUser(sessionData.userId, sessionData.limit))
-                .rejects.toThrow('No sessions found for this user.')
+            //Act
+            const result = await GameSession.getByUser(sessionData.userId, sessionData.limit)
+
+            //Assert
+            expect(result).toEqual([])
 
         })
 
-        // it('should throw an error if the database fails', async () => {
+        it('should use default limit of 10 when no limit is provided', async () => {
 
-        //     //Arrange
-        //     const sessionData = { userId: 1, limit: 10 }
-        //     jest.spyOn(db, 'query').mockRejectedValueOnce(new Error('Database error'))
+            //Arrange
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockGameSession] })
 
-        //     //Act & Assert
-        //     await expect(GameSession.getByUser(sessionData.userId, sessionData.limit))
-        //         .rejects.toThrow('Database error')
+            //Act
+            const result = await GameSession.getByUser(1)
 
-        // })
+            //Assert
+            expect(result).toHaveLength(1)
+            expect(db.query).toHaveBeenCalledWith(
+                'SELECT * FROM game_sessions WHERE user_id = $1 ORDER BY id DESC LIMIT $2;',
+                [1, 10]
+            )
+
+        })
 
     })
 

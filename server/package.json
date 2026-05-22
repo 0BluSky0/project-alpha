@@ -7,9 +7,9 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "seed-db": "node ./database/setup.js",
-    "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
-    "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose",
-    "coverage": "jest --coverage --testPathPattern=/unit/"
+    "unitTests": "NODE_ENV=test jest --testPathPattern=unit.*spec --watchAll --verbose",
+    "integrationTests": "NODE_ENV=test jest --testPathPattern=/integration/ --detectOpenHandles --runInBand --verbose",
+    "coverage": "NODE_ENV=test jest --coverage --testPathPattern=unit.*spec"
   },
   "keywords": [],
   "author": "",

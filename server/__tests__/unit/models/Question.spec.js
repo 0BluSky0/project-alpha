@@ -18,7 +18,7 @@ describe ('Question', () => {
                 question_text: 'exampleQuestion',
                 question_type: 'exampleType',
                 difficulty: 1,
-                created_by: 'exampleName' 
+                created_by: 'exampleName'
             }
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [mockQuestion]})
 
@@ -36,15 +36,14 @@ describe ('Question', () => {
 
         })
 
-
-        it('should throw an error if no questions are found', async () => {
+        it('should throw an error if no questions are found for the subject', async () => {
 
             //Arrange
-            const questionData = { subjectId: 1, limit: 10 }
+            const questionData = { subjectId: 1 }
             jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [] })
 
             //Act & Assert
-            await expect(Question.getBySubject(questionData.subjectId, questionData.limit))
+            await expect(Question.getBySubject(questionData.subjectId))
                 .rejects.toThrow('No questions available for this subject.')
 
         })

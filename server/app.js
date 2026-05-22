@@ -9,10 +9,12 @@ app.use(express.json());
 const authRouter = require("./routers/authRouter");
 const gameRouter = require("./routers/gameRouter");
 const scoreRouter = require("./routers/scoreRouter");
+const subjectRouter = require("./routers/subjectRouter");
 
-app.use ("/auth", authRouter); 
+app.use ("/auth", authRouter);
 app.use("/game", gameRouter);
 app.use("/scores", scoreRouter);
+app.use("/subjects", subjectRouter);
 
 
 

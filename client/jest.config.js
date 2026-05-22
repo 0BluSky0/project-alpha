@@ -1,15 +1,10 @@
 
 module.exports = {
+  testTimeout: 10000,
   testEnvironment: "jest-environment-jsdom", 
-  testPathIgnorePatterns: [
-    "./__tests__/homepage/helpers.js",
-    "./__tests__/challenge/helpers.js",
-    "./__tests__/signup/helpers.js",
-    "./__tests__/login/helpers.js",
-    "./__tests__/leaderboard/helpers.js"
-  ],
+  
   transformIgnorePatterns: [
-    "node_modules/(?!(jsdom|canvas-confetti)/)" 
+    "node_modules/(?!(jsdom|canvas-confetti)/)"
   ],
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",

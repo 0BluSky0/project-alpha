@@ -34,6 +34,18 @@ describe ('Option', () => {
 
         })
 
+        it('should throw an error if no options are found for the question', async () => {
+
+            //Arrange
+            const optionData = { questionId: 1 }
+            jest.spyOn(db, 'query').mockResolvedValueOnce({ rows: [] })
+
+            //Act & Assert
+            await expect(Option.getByQuestion(optionData.questionId))
+                .rejects.toThrow('No options available for this question.')
+
+        })
+
     })
 
 })

@@ -15,6 +15,9 @@ class GameSession {
       [userId, subjectId, score, xpEarned]
     );
 
+    if (response.rows.length === 0) {
+      throw new Error('Game session could not be created.');
+    }
     return new GameSession(response.rows[0]);
   }
 
@@ -23,10 +26,6 @@ class GameSession {
       'SELECT * FROM game_sessions WHERE user_id = $1 ORDER BY id DESC LIMIT $2;',
       [userId, limit]
     );
-
-    if (response.rows.length === 0) {
-      throw new Error('No sessions found for this user.');
-    }
 
     return response.rows.map(g => new GameSession(g));
   }

@@ -37,7 +37,7 @@ class User {
       'SELECT * FROM users WHERE email = $1;',
       [email]
     );
-    if (response.rows.length != 1) {
+    if (response.rows.length !== 1) {
       throw new Error('Unable to locate user.');
     }
     return new User(response.rows[0]);
@@ -48,7 +48,7 @@ class User {
       'SELECT * FROM users WHERE id = $1;',
       [id]
     );
-    if (response.rows.length != 1) {
+    if (response.rows.length !== 1) {
       throw new Error('Unable to locate user.');
     }
     return new User(response.rows[0]);
@@ -69,7 +69,7 @@ class User {
        RETURNING *;`,
       [userId, xpToAdd]
     );
-    if (response.rows.length != 1) {
+    if (response.rows.length !== 1) {
       throw new Error('Unable to update XP.');
     }
     return new User(response.rows[0]);
@@ -80,7 +80,7 @@ class User {
       'UPDATE users SET colour_scheme = $2 WHERE id = $1 RETURNING *;',
       [userId, colourScheme]
     );
-    if (response.rows.length != 1) {
+    if (response.rows.length !== 1) {
       throw new Error('Unable to update colour scheme.');
     }
     return new User(response.rows[0]);
