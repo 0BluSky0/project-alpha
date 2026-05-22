@@ -1,4 +1,4 @@
-const { renderDOM } = require("../homepage/helpers");
+const { renderDOM } = require("../../helpers");
 
 let dom;
 let document;
