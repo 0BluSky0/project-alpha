@@ -1,0 +1,26 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "testHomepage": "jest /__tests__/homepage/test.js",
+    "testSignup": "jest /__tests__/signup/test.js",
+    "testChallenge": "jest /__tests__/challenge/test.js",
+    "testLeaderboard": "jest /__tests__/leaderboard/test.js",
+    "coverage": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "canvas-confetti": "^1.9.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdom": "^19.0.0",
+    "util": "^0.12.5"
+  }
+}
